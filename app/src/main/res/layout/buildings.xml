@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:scrollbarStyle="insideInset"
+    tools:ignore="SpeakableTextPresentCheck">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="match_parent"
+            android:layout_height="274dp"
+            android:onClick="goToFishingActivity"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/fishingbackground"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageView
+            android:onClick="goToForestActivity"
+            android:id="@+id/imageView9"
+            android:layout_width="match_parent"
+            android:layout_height="238dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/forestbackground" />
+
+        <ImageView
+            android:onClick="goToMiningActivity"
+            android:id="@+id/imageView11"
+            android:layout_width="match_parent"
+            android:layout_height="241dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/minebackground" />
+
+        <ImageView
+            android:onClick="goToFarmingActivity"
+            android:id="@+id/imageView12"
+            android:layout_width="match_parent"
+            android:layout_height="241dp"
+            android:scaleType="fitXY"
+            app:srcCompat="@drawable/farmbackground" />
+
+    </LinearLayout>
+</ScrollView>
