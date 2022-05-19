@@ -1,5 +1,7 @@
 package com.example.test_activity.Skills;
 
+import com.example.test_activity.Inventory.Workers;
+
 public class Woodcutting {
 
     private static int Base = 10;
@@ -23,6 +25,7 @@ public class Woodcutting {
     {
         Level = Level + 1;
         System.out.println("Level up! You are now" + Level + "Woodcutting") ;
+        Workers.ForestWorkerSpeed = Workers.ForestWorkerSpeed - 90;
         ExperienceLeft = ExperienceLeft + CalculateExperienceMultiplier(Level);
         Experience = 0;
     }

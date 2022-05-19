@@ -3,20 +3,17 @@ package com.example.test_activity.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.Switch;
 import android.widget.TextView;
 
-import com.example.test_activity.Activities.Workers;
+import com.example.test_activity.Inventory.Workers;
 import com.example.test_activity.Inventory.Inventory;
 import com.example.test_activity.Inventory.Rare;
-import com.example.test_activity.Managers.DialogueManager;
-import com.example.test_activity.Managers.DialougeTest;
 import com.example.test_activity.R;
 import com.example.test_activity.Skills.Mining;
 import com.example.test_activity.Skills.Player;
@@ -35,6 +32,7 @@ public class UiFragment extends Fragment {
 
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -47,18 +45,17 @@ public class UiFragment extends Fragment {
         TextView textViewPlayerLevel = (TextView) v.findViewById(R.id.textViewPlayerLevel);
         ImageButton imgBtn = v.findViewById(R.id.imageButtonResource);
         imgBtn.setTag(1);
+        Button cheatButton = v.findViewById(R.id.buttonCheat);
 
-
-        TimerTask timertask = new TimerTask() {
+        cheatButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void run() {
-                Workers.AddResource_Worker(1);
-                //textViewResource.setText(String.valueOf(Inventory.getLog_Quantity()));
+            public void onClick(View v) {
+                Player.Level = 100;
+                Inventory.Log_Quantity = 10000;
+                Inventory.Stone_Quantity = 10000;
             }
-        };
+        });
 
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(timertask, 1000, 5000);
 
 
         imgBtn.setOnClickListener(new View.OnClickListener() {

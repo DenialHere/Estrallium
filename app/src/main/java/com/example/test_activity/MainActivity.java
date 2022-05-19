@@ -4,13 +4,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.test_activity.Activities.InventoryActivity;
+import com.example.test_activity.Activities.KingdomActivity;
 import com.example.test_activity.Activities.StoreActivity;
-import com.example.test_activity.Activities.Workers;
+import com.example.test_activity.Inventory.Workers;
 import com.example.test_activity.Fragments.UiFragment;
 import com.example.test_activity.Inventory.Inventory;
 import com.example.test_activity.Inventory.Rare;
@@ -23,11 +26,45 @@ import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Handler handler = new Handler();
+        int delay = 1000; //milliseconds
+
+        //Wood workers
+        handler.postDelayed(new Runnable(){
+            public void run(){
+                Workers.AddResource_Worker(0);
+                System.out.println(Integer.toString(Workers.ForestWorkerSpeed));
+                handler.postDelayed(this, Workers.ForestWorkerSpeed);
+            }
+        }, Workers.ForestWorkerSpeed);
+
+        //Updating resources every second
+        handler.postDelayed(new Runnable(){
+            public void run(){
+                UiFragment uiFragment = (UiFragment) getSupportFragmentManager().
+                        findFragmentById(R.id.UifragmentContainerView);
+                ImageButton PlotImg = uiFragment.getView().findViewById(R.id.imageButtonResource);
+                TextView resourceTxt = uiFragment.getView().findViewById(R.id.textViewResource);
+                TextView specialItem = uiFragment.getView().findViewById(R.id.textViewRare);
+
+
+                if (PlotImg.getTag().equals(1)){
+                    resourceTxt.setText(Integer.toString(Inventory.Log_Quantity));
+                    specialItem.setText(Integer.toString(Rare.Magic_Seeds));
+                }
+                if (PlotImg.getTag().equals(2)){
+                    resourceTxt.setText(Integer.toString(Inventory.Stone_Quantity));
+                        specialItem.setText(Integer.toString(Rare.Gem));
+                }
+                handler.postDelayed(this, delay);
+            }
+        }, delay);
+
 
     }
 
@@ -47,7 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
 
         }
-
 
         ImageView skillImg = uiFragment.getView().findViewById(R.id.imageViewSkill);
         skillImg.setImageResource(R.drawable.miningicon);
@@ -75,9 +111,9 @@ public class MainActivity extends AppCompatActivity {
 //        tx.setText("hi");
 
     }
-    public void StoreButton(View view){
+    public void KingdomButton(View view){
 
-        Intent intent = new Intent(this, StoreActivity.class);
+        Intent intent = new Intent(this, KingdomActivity.class);
         startActivity(intent);
 
     }
