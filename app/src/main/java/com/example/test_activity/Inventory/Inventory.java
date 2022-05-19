@@ -3,10 +3,13 @@ package com.example.test_activity.Inventory;
 import com.example.test_activity.Skills.Mining;
 import com.example.test_activity.Skills.Woodcutting;
 
+import java.lang.reflect.Modifier;
+import java.util.Random;
+
 public class Inventory {
 
     public static int Log_Quantity = 0, Stone_Quantity = 0, Fish_Quantity = 0, Wheat_Quantity = 0;
-    private static int Multiplier;
+    private static int Multiplier = 1;
 
     public static final int WOOD = 1;
     public static final int STONE = 2;
@@ -14,16 +17,31 @@ public class Inventory {
     public static final int WHEAT = 4;
 
     public static void AddResource(int i){
+        Random rand = new Random();
         switch (i) {
             case WOOD:
                 Rare.checkForRareDrop(WOOD);
                 Woodcutting.AddExperience();
-                Log_Quantity = Log_Quantity + Rare.Magic_Seeds + 1;
+                if (rand.nextInt(101 - Woodcutting.Level) == 0) {
+                    Multiplier = 2;
+                    System.out.println("MEGA HIT");
+                }
+                else {
+                    Multiplier = 1;
+                }
+                Log_Quantity = Log_Quantity + (Rare.Magic_Seeds + 1 * Multiplier);
                 break;
             case STONE:
                 Rare.checkForRareDrop(STONE);
                 Mining.AddExperience();
-                Stone_Quantity = Stone_Quantity + Rare.Gem + 1;
+                if (rand.nextInt(101 - Mining.Level) == 0) {
+                    Multiplier = 2;
+                    System.out.println("MEGA HIT");
+                }
+                else {
+                    Multiplier = 1;
+                }
+                Stone_Quantity = Stone_Quantity + (Rare.Gem + 1 * Multiplier);
                 break;
             case FISH:
                 Multiplier = 1 + Rare.get_Artifacts();
