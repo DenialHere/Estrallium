@@ -1,14 +1,10 @@
 package com.example.test_activity.Skills;
 
-import com.example.test_activity.Inventory.Rare;
-import com.example.test_activity.R;
-import com.example.test_activity.Resources.Logs;
-
 public class Mining {
 
     public static int Level = 1;
     private static int Experience = 0;
-    private static double ExperienceLeft = 40;
+    public static double ExperienceLeft = 40;
     public static int Modifier = 1;
 
     public static void AddExperience()

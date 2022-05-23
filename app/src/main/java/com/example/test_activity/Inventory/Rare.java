@@ -4,11 +4,11 @@ import java.util.Random;
 
 public class Rare {
 
-    private static int Base_Rare_Drop_Chance = 48;
+    public static int Base_Rare_Drop_Chance = 48;
     public static int Magic_Seeds = 0;
     public static int Gem = 0;
-    private static int artifacts = 0;
-    private static int Giant_Wheat_Seeds = 0;
+    public static int artifacts = 0;
+    public static int Giant_Wheat_Seeds = 0;
 
 
     public static void checkForRareDrop(int plot) {

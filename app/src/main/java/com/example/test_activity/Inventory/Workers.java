@@ -7,6 +7,7 @@ import com.example.test_activity.Fragments.UiFragment;
 import com.example.test_activity.Inventory.Inventory;
 import com.example.test_activity.Inventory.Rare;
 import com.example.test_activity.MainActivity;
+import com.example.test_activity.Managers.SaveManager;
 import com.example.test_activity.R;
 import com.example.test_activity.Skills.Player;
 
@@ -16,7 +17,6 @@ import java.util.Date;
 
 public class Workers {
 
-    public static int AmmountOfWorkers = 0;
     public static int Modifier = 1;
 
     public static int workerCapacity = 30;
@@ -27,6 +27,9 @@ public class Workers {
     public static int Forest_Workers = 1, FishingBoat_Workers = 1, Farm_Workers = 1, Mine_Workers = 0;
 
     public static int ForestWorkerSpeed = 10000;
+    public static int MineWorkerSpeed = 10000;
+    public static int FishingBoatWorkerSpeed = 10000;
+    public static int FarmWorkerSpeed = 10000;
 
     /** ADD WORKER TO PLOT **/
     public static void AddWorkerToPlot(int i){
@@ -132,6 +135,17 @@ public class Workers {
                 break;
 
         }
+
+    }
+
+    public static void AddOfflineResources(){
+
+        long timeWorked = SaveManager.logontime - SaveManager.logofftime;
+
+        Inventory.Log_Quantity = Inventory.Log_Quantity + (int) (timeWorked / ForestWorkerSpeed);
+        Inventory.Stone_Quantity = Inventory.Stone_Quantity + (int) (timeWorked / MineWorkerSpeed);
+        Inventory.Fish_Quantity = Inventory.Fish_Quantity + (int) (timeWorked / FishingBoatWorkerSpeed);
+        Inventory.Wheat_Quantity = Inventory.Wheat_Quantity + (int) (timeWorked / FarmWorkerSpeed);
 
     }
 

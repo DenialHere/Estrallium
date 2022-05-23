@@ -10,19 +10,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.test_activity.Activities.InventoryActivity;
 import com.example.test_activity.Activities.KingdomActivity;
-import com.example.test_activity.Activities.StoreActivity;
 import com.example.test_activity.Inventory.Workers;
 import com.example.test_activity.Fragments.UiFragment;
 import com.example.test_activity.Inventory.Inventory;
 import com.example.test_activity.Inventory.Rare;
+import com.example.test_activity.Managers.SaveManager;
 import com.example.test_activity.Skills.Mining;
 import com.example.test_activity.Skills.Player;
 import com.example.test_activity.Skills.Woodcutting;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +26,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        /** LOAD PREVIOUS GAME DATA **/
+        SaveManager.LoadData(this);
 
         Handler handler = new Handler();
         int delay = 1000; //milliseconds
@@ -115,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, KingdomActivity.class);
         startActivity(intent);
+        SaveManager.SaveData(this);
 
     }
     public void SettingsButton(View view){

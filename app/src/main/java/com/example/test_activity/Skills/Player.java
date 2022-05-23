@@ -2,7 +2,7 @@ package com.example.test_activity.Skills;
 
 public class Player {
     public static int Level  = 1;
-    private static int Experience = 0;
+    public static int Experience = 0;
     private static double ExperienceLeft = 50;
     public static int Modifier = 1;
 

@@ -4,8 +4,9 @@ package com.example.test_activity.Skills;
 public class Fishing {
 
     private static int Base = 10;
-    private static int Level = 1;
+    public static int Level = 1;
     private static int Experience = 0;
+    public static double ExperienceLeft = 40;
     private static int Max_Level = 100;
 
     public static void AddExp() {

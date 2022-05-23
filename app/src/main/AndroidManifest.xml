@@ -19,42 +19,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Activities.ForestActivity"
-            android:exported="true"
-            >
-        </activity>
-        <activity
-            android:name=".Activities.FarmActivity"
-            android:exported="true"
-            >
-        </activity>
-        <activity
-            android:name=".Activities.FishingBoatActivity"
-            android:exported="true"
-            >
-        </activity>
-        <activity
-            android:name=".Activities.MineActivity"
-            android:exported="true"
-            >
-        </activity>
-        <activity
-            android:name=".Activities.BuildingsActivity"
-            android:exported="true"
-            >
-        </activity>
-        <activity
-            android:name=".Activities.InventoryActivity"
-            android:exported="true"
-            >
-        </activity>
-        <activity
             android:name=".Activities.StoreActivity"
-            android:exported="true"
-            >
-        </activity>
-        <activity
-            android:name=".Activities.CashShopActivity"
             android:exported="true"
             >
         </activity>

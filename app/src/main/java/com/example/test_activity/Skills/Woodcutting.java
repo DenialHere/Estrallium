@@ -7,7 +7,7 @@ public class Woodcutting {
     private static int Base = 10;
     public static int Level = 1;
     private static int Experience = 0;
-    private static double ExperienceLeft = 20;
+    public static double ExperienceLeft = 20;
     public static int Modifier = 1;
 
     public static void AddExperience()

@@ -27,16 +27,16 @@ public class Kingdom {
     public static void GetRewards(){
         switch (Level) {
             case 2:
-                Workers.AmmountOfWorkers = Workers.AmmountOfWorkers + 2;
+                Workers.workerUnassigned = Workers.workerUnassigned + 2;
                 break;
             case 3:
-                Workers.AmmountOfWorkers = Workers.AmmountOfWorkers + 2;
+                Workers.workerUnassigned = Workers.workerUnassigned + 2;
                 break;
             case 4:
                 Workers.Modifier++;
                 break;
             case 5:
-                Workers.AmmountOfWorkers = Workers.AmmountOfWorkers + 2;
+                Workers.workerUnassigned = Workers.workerUnassigned + 2;
                 Rare.Magic_Seeds = Rare.Magic_Seeds + 1;
                 System.out.println(Integer.toString(Rare.Magic_Seeds));
                 break;
