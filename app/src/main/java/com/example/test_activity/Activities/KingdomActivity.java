@@ -37,13 +37,25 @@ public class KingdomActivity extends AppCompatActivity {
         //NEEDED RESOURCES
         TextView woodNeeded = findViewById(R.id.textViewWoodNeededKingdom);
         TextView stoneNeeded = findViewById(R.id.textViewStoneNeededKingdom);
+        TextView fishNeeded = findViewById(R.id.textViewStoneFishNeededKingdom);
 
         //TEXT VIEWS
         TextView stoneText = findViewById(R.id.textViewStoneKingdom);
         TextView woodText = findViewById(R.id.textViewWoodKingdom);
+        TextView fishText = findViewById(R.id.textViewFishKingdom);
+
 
 
         //HIDING ELEMENTS THAT ARE NOT REQUIRED
+        //Player level
+        if (Kingdom.Requirements[0] == 0){
+            playerLevel.setVisibility(View.INVISIBLE);
+            playerLevel.setVisibility(View.INVISIBLE);
+        }
+        else {
+            playerLevel.setVisibility(View.VISIBLE);
+            playerLevel.setVisibility(View.VISIBLE);
+        }
         //WOOD
         if (Kingdom.Requirements[1] == 0){
             woodNeeded.setVisibility(View.INVISIBLE);
@@ -62,6 +74,15 @@ public class KingdomActivity extends AppCompatActivity {
             stoneNeeded.setVisibility(View.VISIBLE);
             stoneText.setVisibility(View.VISIBLE);
         }
+        //STONE
+        if (Kingdom.Requirements[3] == 0){
+            fishNeeded.setVisibility(View.INVISIBLE);
+            fishText.setVisibility(View.INVISIBLE);
+        }
+        else {
+            fishNeeded.setVisibility(View.VISIBLE);
+            fishText.setVisibility(View.VISIBLE);
+        }
 
 
         //Setting the requirements
@@ -69,6 +90,8 @@ public class KingdomActivity extends AppCompatActivity {
         playerLevel.setText(Integer.toString(Kingdom.Requirements[0]));
         woodNeeded.setText(Integer.toString(Kingdom.Requirements[1]));
         stoneNeeded.setText(Integer.toString(Kingdom.Requirements[2]));
+        fishNeeded.setText(Integer.toString(Kingdom.Requirements[3]));
+
         rewards.setText(Kingdom.GetRewardsText());
 
         //Setting text color if player meets requirements or not
@@ -87,6 +110,7 @@ public class KingdomActivity extends AppCompatActivity {
         {
             woodNeeded.setTextColor(Color.GREEN);
         }
+
         if (Inventory.Stone_Quantity < Integer.parseInt(stoneNeeded.getText().toString())){
             stoneNeeded.setTextColor(Color.RED);
         }
@@ -94,10 +118,18 @@ public class KingdomActivity extends AppCompatActivity {
         {
             stoneNeeded.setTextColor(Color.GREEN);
         }
+
+        if (Inventory.Fish_Quantity < Integer.parseInt(fishNeeded.getText().toString())){
+            fishNeeded.setTextColor(Color.RED);
+        }
+        else
+        {
+            fishNeeded.setTextColor(Color.GREEN);
+        }
     }
 
     public void LevelUp(View view){
-        Kingdom.LevelUp();
+        Kingdom.LevelUp(this);
         GetRequirements();
     }
 

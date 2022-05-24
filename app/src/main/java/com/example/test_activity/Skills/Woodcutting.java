@@ -1,33 +1,47 @@
 package com.example.test_activity.Skills;
 
-import com.example.test_activity.Inventory.Workers;
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.Gravity;
 
-public class Woodcutting {
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.test_activity.Inventory.Workers;
+import com.example.test_activity.MainActivity;
+import com.example.test_activity.Managers.DialogueManager;
+import com.example.test_activity.Managers.SoundPlayer;
+import com.example.test_activity.R;
+
+
+public class Woodcutting extends AppCompatActivity {
 
     private static int Base = 10;
     public static int Level = 1;
-    private static int Experience = 0;
+    public static int Experience = 0;
     public static double ExperienceLeft = 20;
     public static int Modifier = 1;
+    public static String NAME = "Woodcutting";
 
-    public static void AddExperience()
+    public static void AddExperience(Activity activity)
     {
         Experience = Experience + Modifier;
 
         if (ExperienceLeft - Experience <= 0.999)
         {
-            LevelUp();
+            LevelUp(activity);
         }
 
     }
 
-    private static void LevelUp()
+    private static void LevelUp(Activity activity)
     {
         Level = Level + 1;
-        System.out.println("Level up! You are now" + Level + "Woodcutting") ;
         Workers.ForestWorkerSpeed = Workers.ForestWorkerSpeed - 90;
         ExperienceLeft = ExperienceLeft + CalculateExperienceMultiplier(Level);
         Experience = 0;
+        SoundPlayer levelUpSound = new SoundPlayer();
+        levelUpSound.Play(activity, R.raw.level_up_sound, Player.isMuted);
+        DialogueManager.Show(activity, Woodcutting.NAME, R.drawable.logs, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
     }
 
 

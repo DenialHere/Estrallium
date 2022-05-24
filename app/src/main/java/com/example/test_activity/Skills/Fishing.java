@@ -3,42 +3,51 @@ package com.example.test_activity.Skills;
 
 public class Fishing {
 
-    private static int Base = 10;
     public static int Level = 1;
-    private static int Experience = 0;
-    public static double ExperienceLeft = 40;
-    private static int Max_Level = 100;
+    public static int Experience = 0;
+    public static double ExperienceLeft = 50;
+    public static int Modifier = 1;
 
-    public static void AddExp() {
-        int Next_Level_Experience_Checkpoint = Base * (Level * 2);
-        Experience = Experience + 1;
-        if (Experience >= Next_Level_Experience_Checkpoint) {
-            Level = Level + 1;
-            Experience = 0;
+    public static void AddExperience()
+    {
+        Experience = Experience + Modifier;
+
+        if (ExperienceLeft - Experience <= 0.999)
+        {
+            LevelUp();
         }
 
     }
-    public static int getLevel() {
-        return Level;
+
+    private static void LevelUp()
+    {
+        Level = Level + 1;
+        System.out.println("Level up! You are now" + Level + "fISHING") ;
+        ExperienceLeft = ExperienceLeft + CalculateExperienceMultiplier(Level);
+        Experience = 0;
     }
 
-    public static void setLevel(int level) {
-        Level = level;
-    }
 
-    public static int getExperience() {
-        return Experience;
-    }
-
-    public static void setExperience(int experience) {
-        Experience = experience;
-    }
-    public static int getMax_Level() {
-        return Max_Level;
-    }
-
-    public static void setMax_Level(int max_Level) {
-        Max_Level = max_Level;
+    private static double CalculateExperienceMultiplier(int level) {
+        if (level < 10) {
+            return 1.25;
+        } else if (level < 20) {
+            return 1.2;
+        } else if (level < 30) {
+            return 1.1;
+        } else if (level < 40) {
+            return 1.05;
+        } else if (level < 50) {
+            return 1.04;
+        } else if (level < 60) {
+            return 1.04;
+        } else if (level < 70) {
+            return 1.03;
+        } else if (level < 80) {
+            return 1.02;
+        } else {
+            return 1.1;
+        }
     }
 
 }

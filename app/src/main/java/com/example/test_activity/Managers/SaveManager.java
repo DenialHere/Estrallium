@@ -37,7 +37,7 @@ public class SaveManager {
             /** Rare Values **/
             editor.putInt("amountOfLrares", Rare.Magic_Seeds);
             editor.putInt("amountOfSrares", Rare.Gem);
-            editor.putInt("amountOfFrares", Rare.artifacts);
+            editor.putInt("amountOfFrares", Rare.RainbowFish);
             editor.putInt("amountOfWrares", Rare.Giant_Wheat_Seeds);
 
             /** Kingdom Statistics **/
@@ -83,27 +83,28 @@ public class SaveManager {
             System.out.println(Inventory.Log_Quantity);
 
             /** Load Player Statistics **/
-            Player.Level = sharedPreferences.getInt("playerLevel", 0);
+            Player.Level = sharedPreferences.getInt("playerLevel", 1);
             Player.Experience = sharedPreferences.getInt("playerExperience", 0);
 
             /** Load Rare Values **/
             Rare.Magic_Seeds = sharedPreferences.getInt("amountOfLrares", 0);
             Rare.Gem = sharedPreferences.getInt("amountOfSrares", 0);
-            Rare.artifacts = sharedPreferences.getInt("amountOfFrares", 0);
+            Rare.RainbowFish = sharedPreferences.getInt("amountOfFrares", 0);
             Rare.Giant_Wheat_Seeds = sharedPreferences.getInt("amountOfWrares", 0);
 
             /** Load Kingdom Statistics **/
-            Kingdom.Level = sharedPreferences.getInt("kingdomLevel", 0);
+            Kingdom.Level = sharedPreferences.getInt("kingdomLevel", 1);
 
             /** Load Skill Statistics **/
-            Woodcutting.Level = sharedPreferences.getInt("woodcuttingLevel", 0);
-            Mining.Level = sharedPreferences.getInt("miningLevel", 0);
-            Fishing.Level = sharedPreferences.getInt("fishingLevel", 0);
-            Farming.Level = sharedPreferences.getInt("farmingLevel", 0);
+            Woodcutting.Level = sharedPreferences.getInt("woodcuttingLevel", 1);
+            Mining.Level = sharedPreferences.getInt("miningLevel", 1);
+            Fishing.Level = sharedPreferences.getInt("fishingLevel", 1);
+            Farming.Level = sharedPreferences.getInt("farmingLevel", 1);
 
-            Woodcutting.ExperienceLeft = sharedPreferences.getInt("woodcuttingExperience", 0);
-            Mining.ExperienceLeft = sharedPreferences.getInt("miningExperience", 0);
-            Fishing.ExperienceLeft = sharedPreferences.getInt("fishingExperience", 0);
+            //TODO: FIX
+            Woodcutting.Experience = sharedPreferences.getInt("woodcuttingExperience", 0);
+            Mining.Experience = sharedPreferences.getInt("miningExperience", 0);
+            Fishing.Experience = sharedPreferences.getInt("fishingExperience", 0);
             Farming.ExperienceLeft = sharedPreferences.getInt("farmingExperience", 0);
 
             /** Load Worker Values **/
@@ -126,5 +127,12 @@ public class SaveManager {
 
             Workers.AddOfflineResources();
 
+        }
+        public static void Clear(Context context){
+
+            SharedPreferences sharedPreferences = context.getSharedPreferences("GAMESTATE", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.clear();
+            editor.apply();
         }
 }

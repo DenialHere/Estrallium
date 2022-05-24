@@ -16,33 +16,28 @@ public class DialogueManager {
  *    Gravity.BOTTOM , 1);
  */
 
-    public void Show(Activity activity, String name, int picture, int level, int position,
+    public static int LEVELUP = 1;
+    public static int RAREITEM = 2;
+    public static int MESSAGE = 3;
+
+    public static void Show(Activity activity, String name, int picture, int level, int position,
                      int dialogType)
     {
         String messageString = "";
 
-        if (dialogType == 1)
-        {
-            messageString = name + " level up! \nYou are now level " + level + ".";
+        switch (dialogType){
+            case 1:
+                messageString = name + " level up! \nYou are now level " + level + ".";
+                break;
+            case 2:
+                messageString = "You found " + level + " " + name +
+                        "! \n Your gather rate has been improved by 100%";
+                break;
+            case 3:
+                //
         }
-        else if (dialogType == 2)
-        {
-            messageString = "You found " + level + " " + name +
-                    "! \n Your gather rate has been improved by 100%";
-        }
-
-
-            /** Every 5 levels the skill gains an extra boost to gather rate
-             *   If the passed through level is a multiple of 5 & is not the player level then edit
-             *   the level up string to indicate the increase to gather rate */
-
-            if (level % 5 == 0 && name != "You" ) {
-                messageString += "\n2x more xp per click!";
-            }
-
-
             //Creating a new dialog with the passed activity
-            Dialog dialog = new Dialog(null);
+            Dialog dialog = new Dialog(activity);
 
             //Setting the dialog to the level_message.xml in Layout
             dialog.setContentView(R.layout.level_message);
@@ -65,7 +60,32 @@ public class DialogueManager {
         }
 
 
+    public static void ShowMessage(Activity activity, String message, int picture,int position)
+    {
 
+
+        //Creating a new dialog with the passed activity
+        Dialog dialog = new Dialog(activity);
+
+        //Setting the dialog to the level_message.xml in Layout
+        dialog.setContentView(R.layout.dialog);
+
+        //Setting levelUpMessage to the textview in level_message.xml
+        TextView textViewDialog = dialog.findViewById(R.id.textViewDialog);
+        //The textview is where the level up text will be
+        textViewDialog.setText(message);
+
+        //Setting the position of the dialog box
+        dialog.getWindow().setGravity(position);
+
+        //Setting the icon image of the skill from the image passed
+        ImageView img = dialog.findViewById(R.id.imageViewDialog);
+        img.setImageResource(picture);
+
+
+        //Displaying the custom dialog
+        dialog.show();
+    }
 
 
 }

@@ -3,7 +3,7 @@ package com.example.test_activity.Skills;
 public class Mining {
 
     public static int Level = 1;
-    private static int Experience = 0;
+    public static int Experience = 0;
     public static double ExperienceLeft = 40;
     public static int Modifier = 1;
 
@@ -21,7 +21,7 @@ public class Mining {
     private static void LevelUp()
     {
         Level = Level + 1;
-        System.out.println("Level up! You are now" + Level + "Woodcutting") ;
+        System.out.println("Level up! You are now" + Level + "Woodcutting");
         ExperienceLeft = ExperienceLeft + CalculateExperienceMultiplier(Level);
         Experience = 0;
     }

@@ -1,5 +1,9 @@
 package com.example.test_activity.Inventory;
 
+import android.app.Activity;
+
+import com.example.test_activity.Managers.SaveManager;
+import com.example.test_activity.Skills.Fishing;
 import com.example.test_activity.Skills.Mining;
 import com.example.test_activity.Skills.Woodcutting;
 
@@ -16,12 +20,12 @@ public class Inventory {
     public static final int FISH = 3;
     public static final int WHEAT = 4;
 
-    public static void AddResource(int i){
+    public static void AddResource(int i, Activity activity){
         Random rand = new Random();
         switch (i) {
             case WOOD:
-                Rare.checkForRareDrop(WOOD);
-                Woodcutting.AddExperience();
+                Rare.checkForRareDrop(WOOD, activity);
+                Woodcutting.AddExperience(activity);
                 if (rand.nextInt(101 - Woodcutting.Level) == 0) {
                     Multiplier = 2;
                     System.out.println("MEGA HIT");
@@ -32,7 +36,7 @@ public class Inventory {
                 Log_Quantity = Log_Quantity + (Rare.Magic_Seeds + 1 * Multiplier);
                 break;
             case STONE:
-                Rare.checkForRareDrop(STONE);
+                Rare.checkForRareDrop(STONE, activity);
                 Mining.AddExperience();
                 if (rand.nextInt(101 - Mining.Level) == 0) {
                     Multiplier = 2;
@@ -44,9 +48,16 @@ public class Inventory {
                 Stone_Quantity = Stone_Quantity + (Rare.Gem + 1 * Multiplier);
                 break;
             case FISH:
-                Multiplier = 1 + Rare.get_Artifacts();
-                Fish_Quantity = Fish_Quantity + Multiplier;
-                System.out.println("testingfish");
+                Rare.checkForRareDrop(FISH, activity);
+                Fishing.AddExperience();
+                if (rand.nextInt(101 - Fishing.Level) == 0) {
+                    Multiplier = 2;
+                    System.out.println("MEGA HIT");
+                }
+                else {
+                    Multiplier = 1;
+                }
+                Fish_Quantity = Fish_Quantity + (Rare.RainbowFish + 1 * Multiplier);
                 break;
             case WHEAT:
                 Multiplier = 1 + Rare.getGiant_Wheat_Seeds();
@@ -54,7 +65,6 @@ public class Inventory {
                 System.out.println("testingwheat");
                 break;
         }
-
     }
 
     public static int getMultiplier() {
