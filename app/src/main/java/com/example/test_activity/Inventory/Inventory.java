@@ -15,6 +15,8 @@ public class Inventory {
     public static int Log_Quantity = 0, Stone_Quantity = 0, Fish_Quantity = 0, Wheat_Quantity = 0;
     private static int Multiplier = 1;
 
+    public static int Gold = 0;
+
     public static final int WOOD = 1;
     public static final int STONE = 2;
     public static final int FISH = 3;

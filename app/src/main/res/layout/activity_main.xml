@@ -156,6 +156,7 @@
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="0"
+            android:onClick="CheatButton"
             android:text="Cheat" />
 
         <Button
@@ -165,6 +166,14 @@
             android:layout_weight="0"
             android:onClick="KingdomButton"
             android:text="Kingdom" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:onClick="StoreButton"
+            android:text="Store" />
 
     </LinearLayout>
 

@@ -2,11 +2,10 @@ package com.example.test_activity.Inventory;
 
 import android.app.Activity;
 import android.view.Gravity;
-import android.widget.TextView;
 
+import com.example.test_activity.Constants;
 import com.example.test_activity.Managers.DialogueManager;
 import com.example.test_activity.Managers.SaveManager;
-import com.example.test_activity.R;
 import com.example.test_activity.Skills.Player;
 
 //TODO
@@ -18,10 +17,10 @@ public class Workers {
 
     public static int workerCapacity = 30;
     /** AVAILABLE WORKERS **/
-    public static int workerUnassigned = 10;
+    public static int workerUnassigned = 0;
 
     /** ASSIGNED THEM ALL TO 1 TO TEST **/
-    public static int Forest_Workers = 1, FishingBoat_Workers = 1, Farm_Workers = 1, Mine_Workers = 0;
+    public static int Forest_Workers = 0, FishingBoat_Workers = 0, Farm_Workers = 0, Mine_Workers = 0;
 
     public static int ForestWorkerSpeed = 10000;
     public static int MineWorkerSpeed = 10000;
@@ -31,7 +30,7 @@ public class Workers {
     /** ADD WORKER TO PLOT **/
     public static void AddWorkerToPlot(int i, Activity activity){
 
-        if (i == 1) {
+        if (i == Constants.WOOD) {
             if (Forest_Workers < workerCapacity && workerUnassigned > 0){
                 workerUnassigned--;
                 Forest_Workers++;
@@ -39,8 +38,8 @@ public class Workers {
             else {
                 ErrorMessage(activity);
             }
-        }else if (i == 2){
-            if (Mine_Workers < workerCapacity && workerUnassigned > 0){
+        }else if (i == Constants.STONE){
+            if (Mine_Workers < workerCapacity && workerUnassigned > 0 && Player.Level >= Constants.miningLevelRequiredForPlot){
                 workerUnassigned--;
                 Mine_Workers++;
             }
@@ -48,8 +47,8 @@ public class Workers {
                 ErrorMessage(activity);
             }
         }
-        else if (i == 3){
-            if (FishingBoat_Workers < workerCapacity && workerUnassigned > 0){
+        else if (i == Constants.FISHING){
+            if (FishingBoat_Workers < workerCapacity && workerUnassigned > 0 && Player.Level >= Constants.fishingLevelRequiredForPlot){
                 workerUnassigned--;
                 FishingBoat_Workers++;
             } else {
@@ -69,7 +68,7 @@ public class Workers {
     /** REMOVE WORKER FROM PLOT **/
     public static void RemoveWorkerFromPlot(int i, Activity activity){
 
-        if (i == 1) {
+        if (i == Constants.WOOD) {
             if (Forest_Workers > 0){
                 Forest_Workers--;
                 workerUnassigned++;
@@ -77,7 +76,7 @@ public class Workers {
             else {
                 ErrorMessage(activity);
             }
-        }else if (i == 2){
+        }else if (i == Constants.STONE){
             if (Mine_Workers > 0){
                 Mine_Workers--;
                 workerUnassigned++;
@@ -86,7 +85,7 @@ public class Workers {
                 ErrorMessage(activity);
             }
         }
-        else if (i == 3){
+        else if (i == Constants.FISHING){
             if (FishingBoat_Workers > 0){
                 FishingBoat_Workers--;
                 workerUnassigned++;
@@ -158,6 +157,6 @@ public class Workers {
     }
 
     public static void ErrorMessage(Activity activity){
-        DialogueManager.ShowMessage(activity, "You don't have enough workers!", 0, Gravity.CENTER);
+        DialogueManager.ShowMessage(activity, "You don't have enough workers, or you don't have the level to access this plot!", 0, Gravity.CENTER);
     }
 }

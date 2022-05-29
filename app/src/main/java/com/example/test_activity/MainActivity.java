@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.test_activity.Activities.KingdomActivity;
+import com.example.test_activity.Activities.StoreActivity;
 import com.example.test_activity.Inventory.Kingdom;
 import com.example.test_activity.Inventory.Workers;
 import com.example.test_activity.Inventory.Inventory;
@@ -77,6 +78,18 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    public void CheatButton(View view){
+        Inventory.Log_Quantity = 1000000;
+        Inventory.Stone_Quantity = 1000000;
+        Inventory.Fish_Quantity = 1000000;
+        Player.Level = 1000;
+        UpdateViews();
+
+    }
+    public void StoreButton(View view){
+        Intent intent = new Intent(this, StoreActivity.class);
+        startActivity(intent);
+    }
 
     public void UpdateViews(){
         ImageButton PlotImg = findViewById(R.id.imageButtonResource);
@@ -85,17 +98,17 @@ public class MainActivity extends AppCompatActivity {
         TextView workers = findViewById(R.id.textViewWorkers);
         TextView workersAvailable = findViewById(R.id.textViewWorkersAvaliable);
 
-        if (Player.CurrentPlot == Inventory.WOOD){
+        if (Player.CurrentPlot == Constants.WOOD){
             resourceTxt.setText(Integer.toString(Inventory.Log_Quantity));
             specialItem.setText(Integer.toString(Rare.Magic_Seeds));
             workers.setText(Integer.toString(Workers.Forest_Workers));
         }
-        if (Player.CurrentPlot == Inventory.STONE){
+        if (Player.CurrentPlot == Constants.STONE){
             resourceTxt.setText(Integer.toString(Inventory.Stone_Quantity));
             specialItem.setText(Integer.toString(Rare.Gem));
             workers.setText(Integer.toString(Workers.Mine_Workers));
         }
-        if (Player.CurrentPlot == Inventory.FISH){
+        if (Player.CurrentPlot == Constants.FISHING){
             resourceTxt.setText(Integer.toString(Inventory.Fish_Quantity));
             specialItem.setText(Integer.toString(Rare.RainbowFish));
             workers.setText(Integer.toString(Workers.FishingBoat_Workers));
@@ -134,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
         SoundPlayer gatherSound = new SoundPlayer();
 
             textViewPlayerLevel.setText(Integer.toString(Player.Level));
-            if (Player.CurrentPlot == Inventory.WOOD){
+            if (Player.CurrentPlot == Constants.WOOD){
                 gatherSound.Play(this, R.raw.wood_chop2, Player.isMuted);
                 Inventory.AddResource(Inventory.WOOD, this);
                 textViewResource.setText(Integer.toString(Inventory.Log_Quantity));
@@ -143,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             }
-            if (Player.CurrentPlot == Inventory.STONE && Player.Level >=5){
+            if (Player.CurrentPlot == Constants.STONE && Player.Level >=5){
                 gatherSound.Play(this, R.raw.pickaxe, Player.isMuted);
                 Inventory.AddResource(Inventory.STONE, this);
                 textViewResource.setText(Integer.toString(Inventory.Stone_Quantity));
@@ -151,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
                 textViewSkill.setText(Integer.toString(Mining.Level));
 
             }
-        if (Player.CurrentPlot == Inventory.FISH && Player.Level >=10){
+        if (Player.CurrentPlot == Constants.FISHING && Player.Level >=10){
             gatherSound.Play(this, R.raw.fishing_sound, Player.isMuted);
             Inventory.AddResource(Inventory.FISH, this);
             textViewResource.setText(Integer.toString(Inventory.Fish_Quantity));
