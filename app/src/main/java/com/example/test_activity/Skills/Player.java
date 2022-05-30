@@ -10,7 +10,7 @@ import com.example.test_activity.R;
 public class Player {
     public static int Level  = 1;
     public static int Experience = 0;
-    private static double ExperienceLeft = 40;
+    public static double ExperienceLeft = 40;
     public static int Modifier = 1;
     public static String NAME = "You";
     public static int CurrentPlot = 1;
@@ -21,7 +21,6 @@ public class Player {
     public static void AddExperience(Activity activity)
     {
         Experience = Experience + Modifier;
-
         if (ExperienceLeft - Experience <= 0.999)
         {
             LevelUp(activity);

@@ -1,29 +1,39 @@
 package com.example.test_activity.Skills;
 
+import android.app.Activity;
+import android.view.Gravity;
+
+import com.example.test_activity.Managers.DialogueManager;
+import com.example.test_activity.Managers.SoundPlayer;
+import com.example.test_activity.R;
+
 public class Mining {
 
     public static int Level = 1;
     public static int Experience = 0;
     public static double ExperienceLeft = 40;
     public static int Modifier = 1;
+    public static String NAME = "Mining";
 
-    public static void AddExperience()
+    public static void AddExperience(Activity activity)
     {
         Experience = Experience + Modifier;
 
         if (ExperienceLeft - Experience <= 0.999)
         {
-            LevelUp();
+            LevelUp(activity);
         }
 
     }
 
-    private static void LevelUp()
+    private static void LevelUp(Activity activity)
     {
         Level = Level + 1;
-        System.out.println("Level up! You are now" + Level + "Woodcutting");
         ExperienceLeft = ExperienceLeft + CalculateExperienceMultiplier(Level);
         Experience = 0;
+        SoundPlayer levelUpSound = new SoundPlayer();
+        levelUpSound.Play(activity, R.raw.level_up_sound, Player.isMuted);
+        DialogueManager.Show(activity, Mining.NAME, R.drawable.ironore, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
     }
 
 

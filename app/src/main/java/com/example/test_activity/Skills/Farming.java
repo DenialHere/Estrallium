@@ -4,7 +4,7 @@ public class Farming {
 
     private static int Base = 10;
     public static int Level = 1;
-    private static int Experience = 0;
+    public static int Experience = 0;
     public static double ExperienceLeft = 40;
     private static int Max_Level = 100;
 

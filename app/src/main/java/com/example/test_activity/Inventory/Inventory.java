@@ -39,7 +39,7 @@ public class Inventory {
                 break;
             case STONE:
                 Rare.checkForRareDrop(STONE, activity);
-                Mining.AddExperience();
+                Mining.AddExperience(activity);
                 if (rand.nextInt(101 - Mining.Level) == 0) {
                     Multiplier = 2;
                     System.out.println("MEGA HIT");
@@ -51,7 +51,7 @@ public class Inventory {
                 break;
             case FISH:
                 Rare.checkForRareDrop(FISH, activity);
-                Fishing.AddExperience();
+                Fishing.AddExperience(activity);
                 if (rand.nextInt(101 - Fishing.Level) == 0) {
                     Multiplier = 2;
                     System.out.println("MEGA HIT");

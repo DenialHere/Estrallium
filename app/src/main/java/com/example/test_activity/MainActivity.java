@@ -2,9 +2,11 @@ package com.example.test_activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
@@ -13,6 +15,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.test_activity.Activities.KingdomActivity;
@@ -23,6 +26,7 @@ import com.example.test_activity.Inventory.Inventory;
 import com.example.test_activity.Inventory.Rare;
 import com.example.test_activity.Managers.SaveManager;
 import com.example.test_activity.Managers.SoundPlayer;
+import com.example.test_activity.Skills.Farming;
 import com.example.test_activity.Skills.Fishing;
 import com.example.test_activity.Skills.Mining;
 import com.example.test_activity.Skills.Player;
@@ -34,13 +38,21 @@ public class MainActivity extends AppCompatActivity {
     SwipeListener swipeListener;
     static int DIRECTION_RIGHT = 1;
     static int DIRECTION_LEFT = 2;
+    ProgressBar skillLevelPb, playerLevelPb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        skillLevelPb = findViewById(R.id.progressBarSkillLevel);
+        playerLevelPb = findViewById(R.id.progressBarPlayerLevel);
 
-        //
+        skillLevelPb.setMax((int)Woodcutting.ExperienceLeft);
+        skillLevelPb.setProgress(Woodcutting.Experience);
+
+        playerLevelPb.setMax((int)Player.ExperienceLeft);
+        playerLevelPb.setProgress(Player.Experience);
+
         linearLayout = findViewById(R.id.linear_layout);
         swipeListener = new SwipeListener(linearLayout);
 
@@ -113,7 +125,13 @@ public class MainActivity extends AppCompatActivity {
             specialItem.setText(Integer.toString(Rare.RainbowFish));
             workers.setText(Integer.toString(Workers.FishingBoat_Workers));
         }
+        if (Player.CurrentPlot == Inventory.WHEAT){
+            resourceTxt.setText(Integer.toString(Inventory.Wheat_Quantity));
+            specialItem.setText(Integer.toString(Rare.Giant_Wheat_Seeds));
+            workers.setText(Integer.toString(Workers.Farm_Workers));
+        }
         workersAvailable.setText("/" + Workers.workerUnassigned);
+        ProgressBarSkillLevel();
     }
 
     public void KingdomButton(View view){
@@ -126,6 +144,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void ProgressBarSkillLevel(){
+        switch (Player.CurrentPlot){
+            case Inventory.WOOD:
+                skillLevelPb.setMax((int)Woodcutting.ExperienceLeft);
+                skillLevelPb.setProgress(Woodcutting.Experience);
+                break;
+            case Inventory.STONE:
+                skillLevelPb.setMax((int)Mining.ExperienceLeft);
+                skillLevelPb.setProgress(Mining.Experience);
+                break;
+            case Inventory.FISH:
+                skillLevelPb.setMax((int)Fishing.ExperienceLeft);
+                skillLevelPb.setProgress(Fishing.Experience);
+                break;
+            case Inventory.WHEAT:
+                skillLevelPb.setMax((int) Farming.ExperienceLeft);
+                skillLevelPb.setProgress(Farming.Experience);
+                break;
+        }
+
+    }
+
+    public void ProgressPlayerLevel(){
+        playerLevelPb.setMax((int)Player.ExperienceLeft);
+        playerLevelPb.setProgress(Player.Experience);
+    }
     public void AddWorkerButton(View view){
         Workers.AddWorkerToPlot(Player.CurrentPlot, this);
         UpdateViews();
@@ -145,6 +189,7 @@ public class MainActivity extends AppCompatActivity {
         ImageButton imgBtn = findViewById(R.id.imageButtonResource);
         Button cheatButton = findViewById(R.id.buttonCheat);
         SoundPlayer gatherSound = new SoundPlayer();
+        Activity activity = this;
 
             textViewPlayerLevel.setText(Integer.toString(Player.Level));
             if (Player.CurrentPlot == Constants.WOOD){
@@ -172,12 +217,35 @@ public class MainActivity extends AppCompatActivity {
             textViewSkill.setText(Integer.toString(Fishing.Level));
 
         }
+        if (Player.CurrentPlot == Inventory.WHEAT && Player.Level >=15){
+            gatherSound.Play(this, R.raw.fishing_sound, Player.isMuted);
+            TextView farmTimer = findViewById(R.id.textViewTime);
+
+            new CountDownTimer(30000, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    farmTimer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                    //here you can have your logic to set text to edittext
+                }
+
+                public void onFinish() {
+                    Inventory.AddResource(Inventory.WHEAT, activity);
+                    UpdateViews();
+                    farmTimer.setText("Farming complete!");
+                }
+
+            }.start();
+
+        }
             if (Player.CurrentPlot == 99){
                 System.out.println("CANNOT ACCESS");
             }
             else {
                 Player.AddExperience(this);
             }
+
+            ProgressBarSkillLevel();
+            ProgressPlayerLevel();
         }
 
     private class SwipeListener  implements View.OnTouchListener {
@@ -257,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         System.out.println(Player.CurrentPlot + "");
-
+        UpdateViews();
         switch (Player.CurrentPlot){
             case 1:
                 Player.CurrentPlot = Inventory.WOOD;
@@ -301,6 +369,20 @@ public class MainActivity extends AppCompatActivity {
                 if (Player.Level >= 10) {
                     plotImg.setImageResource(R.drawable.fishingbackground);
                     Player.CurrentPlot = Inventory.FISH;
+                }
+                break;
+            case 4:
+                specialItemImg.setImageResource(R.drawable.artifact);
+                plotImg.setImageResource(R.drawable.lock);
+                skillImg.setImageResource(R.drawable.farmingicon);
+                resourceImg.setImageResource(R.drawable.grain);
+                resourceTxt.setText(Integer.toString(Inventory.Wheat_Quantity));
+                rareTxt.setText(Integer.toString(Rare.Giant_Wheat_Seeds));
+                skillTxt.setText(Integer.toString(Farming.Level));
+                workers.setText(Integer.toString(Workers.Farm_Workers));
+                if (Player.Level >= 15) {
+                    plotImg.setImageResource(R.drawable.farmbackground);
+                    Player.CurrentPlot = Inventory.WHEAT;
                 }
                 break;
         }
