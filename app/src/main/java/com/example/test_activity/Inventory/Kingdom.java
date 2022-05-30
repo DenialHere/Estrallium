@@ -65,7 +65,7 @@ public class Kingdom {
                 break;
             case 7:
                 Workers.workerUnassigned = Workers.workerUnassigned + 2;
-                Shop.LogPrice--;
+                Shop.LogBuyPrice--;
                 break;
             case 8:
                 Rare.Gem++;

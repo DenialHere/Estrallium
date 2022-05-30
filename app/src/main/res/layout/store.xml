@@ -73,7 +73,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="center"
-            android:hint="1"
+            android:hint="0"
             android:inputType="number"
             android:maxLength="5"
             android:minHeight="48dp"
@@ -89,7 +89,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="center"
-            android:hint="1"
+            android:hint="0"
             android:inputType="number"
             android:maxLength="5"
             android:minHeight="48dp"
@@ -210,7 +210,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="center"
-            android:hint="1"
+            android:hint="0"
             android:inputType="number"
             android:maxLength="5"
             android:minHeight="48dp"
@@ -226,7 +226,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:gravity="center"
-            android:hint="1"
+            android:hint="0"
             android:inputType="number"
             android:maxLength="5"
             android:minHeight="48dp"
@@ -309,10 +309,12 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/buttonBuySell"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:onClick="BuySellButton"
+        android:tag="0"
         android:text="Sell" />
 
 </LinearLayout>
