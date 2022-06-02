@@ -28,6 +28,11 @@
             android:exported="true"
             >
         </activity>
+        <activity
+            android:name=".Activities.RefineryActivity"
+            android:exported="true"
+            >
+        </activity>
     </application>
 
 </manifest>

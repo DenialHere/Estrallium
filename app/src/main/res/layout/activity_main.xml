@@ -213,6 +213,14 @@
             android:onClick="StoreButton"
             android:text="Store" />
 
+        <Button
+            android:onClick="RefineryButton"
+            android:id="@+id/goToRefinery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Refinery" />
+
     </LinearLayout>
 
 </LinearLayout>

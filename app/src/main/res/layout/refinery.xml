@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteX="2dp"
+    tools:layout_editor_absoluteY="-269dp">
+
+    <CheckBox
+        android:id="@+id/filletbox"
+        android:layout_width="96dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="46dp"
+        android:text="Fillet"
+        app:layout_constraintBottom_toTopOf="@+id/quantityboxrefinery"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/oilbox"
+        android:layout_width="92dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="19dp"
+        android:layout_marginEnd="23dp"
+        android:layout_marginBottom="46dp"
+        android:text="Oil"
+        app:layout_constraintBottom_toTopOf="@+id/quantityboxrefinery"
+        app:layout_constraintEnd_toStartOf="@+id/bonesbox"
+        app:layout_constraintStart_toEndOf="@+id/filletbox" />
+
+    <CheckBox
+        android:id="@+id/bonesbox"
+        android:layout_width="92dp"
+        android:layout_height="52dp"
+        android:layout_marginEnd="46dp"
+        android:layout_marginBottom="46dp"
+        android:text="Bones"
+        app:layout_constraintBottom_toTopOf="@+id/quantityboxrefinery"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/refinebutton"
+        android:layout_width="135dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="139dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/woodcutting_plot_default_button"
+        android:foreground="@drawable/woodcutting_plot_default_button"
+        android:onClick="Refine"
+        android:text="CRAFT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/brickbox"
+        android:layout_width="91dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="20dp"
+        android:text="Bricks"
+        app:layout_constraintBottom_toTopOf="@+id/lumberbox"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/gravelbox"
+        android:layout_width="87dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="28dp"
+        android:layout_marginBottom="20dp"
+        android:text="Gravel"
+        app:layout_constraintBottom_toTopOf="@+id/plankbox"
+        app:layout_constraintEnd_toStartOf="@+id/mortarbox"
+        app:layout_constraintStart_toEndOf="@+id/brickbox" />
+
+    <CheckBox
+        android:id="@+id/mortarbox"
+        android:layout_width="88dp"
+        android:layout_height="58dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="24dp"
+        android:text="Mortar"
+        app:layout_constraintBottom_toTopOf="@+id/sawdustbox"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <CheckBox
+        android:id="@+id/sawdustbox"
+        android:layout_width="95dp"
+        android:layout_height="44dp"
+        android:layout_marginEnd="43dp"
+        android:layout_marginBottom="27dp"
+        android:text="Sawdust"
+        app:layout_constraintBottom_toTopOf="@+id/sandwichbox"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <CheckBox
+        android:id="@+id/breadbox"
+        android:layout_width="94dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="28dp"
+        android:text="Bread"
+        app:layout_constraintBottom_toTopOf="@+id/filletbox"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/stewbox"
+        android:layout_width="89dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="26dp"
+        android:layout_marginBottom="27dp"
+        android:text="Stew"
+        app:layout_constraintBottom_toTopOf="@+id/oilbox"
+        app:layout_constraintEnd_toStartOf="@+id/sandwichbox"
+        app:layout_constraintStart_toEndOf="@+id/breadbox" />
+
+    <CheckBox
+        android:id="@+id/sandwichbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="45dp"
+        android:layout_marginBottom="27dp"
+        android:text="Sandwich"
+        app:layout_constraintBottom_toTopOf="@+id/bonesbox"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <CheckBox
+        android:id="@+id/lumberbox"
+        android:layout_width="94dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="21dp"
+        android:text="Lumber"
+        app:layout_constraintBottom_toTopOf="@+id/breadbox"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <CheckBox
+        android:id="@+id/plankbox"
+        android:layout_width="93dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginEnd="22dp"
+        android:layout_marginBottom="21dp"
+        android:text="Planks"
+        app:layout_constraintBottom_toTopOf="@+id/stewbox"
+        app:layout_constraintEnd_toStartOf="@+id/sawdustbox"
+        app:layout_constraintStart_toEndOf="@+id/lumberbox" />
+
+    <EditText
+        android:id="@+id/quantityboxrefinery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="91dp"
+        android:layout_marginEnd="91dp"
+        android:layout_marginBottom="45dp"
+        android:ems="10"
+        android:inputType="number"
+        app:layout_constraintBottom_toTopOf="@+id/previewbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/previewbox"
+        android:layout_width="146dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginBottom="16dp"
+        android:text="Estimated time to make "
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/refinebutton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

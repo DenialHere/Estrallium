@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.test_activity.Activities.KingdomActivity;
+import com.example.test_activity.Activities.RefineryActivity;
 import com.example.test_activity.Activities.StoreActivity;
 import com.example.test_activity.Inventory.Kingdom;
 import com.example.test_activity.Inventory.Workers;
@@ -100,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void StoreButton(View view){
         Intent intent = new Intent(this, StoreActivity.class);
+        startActivity(intent);
+    }
+    public void RefineryButton(View view){
+        Intent intent = new Intent(this, RefineryActivity.class);
         startActivity(intent);
     }
 

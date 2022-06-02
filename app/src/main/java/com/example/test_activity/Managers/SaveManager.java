@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import com.example.test_activity.Inventory.Inventory;
 import com.example.test_activity.Inventory.Kingdom;
 import com.example.test_activity.Inventory.Rare;
+import com.example.test_activity.Inventory.Refinery;
 import com.example.test_activity.Inventory.Workers;
 import com.example.test_activity.Skills.Farming;
 import com.example.test_activity.Skills.Fishing;
@@ -67,6 +68,23 @@ public class SaveManager {
             logofftime = calendar.getTimeInMillis();
             editor.putLong("logOffTime", logofftime);
 
+            /** Refined Material Values **/
+            editor.putInt("amountOfBricks", Refinery.Brick);
+            editor.putInt("amountOfGravel", Refinery.Gravel);
+            editor.putInt("amountOfMortar", Refinery.Mortar);
+
+            editor.putInt("amountOfLumber", Refinery.Lumber);
+            editor.putInt("amountOfPlank", Refinery.Plank);
+            editor.putInt("amountOfSawdust", Refinery.Sawdust);
+
+            editor.putInt("amountOfSandwich", Refinery.Sandwich);
+            editor.putInt("amountOfStew", Refinery.Stew);
+            editor.putInt("amountOfBread", Refinery.Bread);
+
+            editor.putInt("amountOfFillet", Refinery.Fillet);
+            editor.putInt("amountOfOil", Refinery.Oil);
+            editor.putInt("amountOfBones", Refinery.Bones);
+
             /** Commit **/
             editor.commit();
             System.out.println(logofftime);
@@ -74,6 +92,23 @@ public class SaveManager {
         public static void LoadData(Context context){
 
             SharedPreferences sharedPreferences = context.getSharedPreferences("GAMESTATE", Context.MODE_PRIVATE);
+
+            /** Load Refined Material Values **/
+            Refinery.Brick = sharedPreferences.getInt("amountOfBricks", 0);
+            Refinery.Gravel = sharedPreferences.getInt("amountOfGravel", 0);
+            Refinery.Mortar = sharedPreferences.getInt("amountOfMortar", 0);
+
+            Refinery.Lumber = sharedPreferences.getInt("amountOfLumber", 0);
+            Refinery.Plank = sharedPreferences.getInt("amountOfPlank", 0);
+            Refinery.Sawdust = sharedPreferences.getInt("amountOfSawdust", 0);
+
+            Refinery.Sandwich = sharedPreferences.getInt("amountOfSandwich", 0);
+            Refinery.Stew = sharedPreferences.getInt("amountOfStew", 0);
+            Refinery.Bread = sharedPreferences.getInt("amountOfBread", 0);
+
+            Refinery.Fillet = sharedPreferences.getInt("amountOfFillet", 0);
+            Refinery.Oil = sharedPreferences.getInt("amountOfOil", 0);
+            Refinery.Bones = sharedPreferences.getInt("amountOfBones", 0);
 
             /** Load Inventory Values **/
             Inventory.Log_Quantity = sharedPreferences.getInt("amountOfLogs", 0);
