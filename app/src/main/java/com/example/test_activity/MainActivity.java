@@ -203,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
                 textViewResource.setText(Integer.toString(Inventory.Log_Quantity));
                 textViewRare.setText(Integer.toString(Rare.Magic_Seeds));
                 textViewSkill.setText(Integer.toString(Woodcutting.Level));
+                Player.AddExperience(this);
 
 
             }
@@ -212,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
                 textViewResource.setText(Integer.toString(Inventory.Stone_Quantity));
                 textViewRare.setText(Integer.toString(Rare.Gem));
                 textViewSkill.setText(Integer.toString(Mining.Level));
+                Player.AddExperience(this);
 
             }
         if (Player.CurrentPlot == Constants.FISHING && Player.Level >=10){
@@ -220,35 +222,43 @@ public class MainActivity extends AppCompatActivity {
             textViewResource.setText(Integer.toString(Inventory.Fish_Quantity));
             textViewRare.setText(Integer.toString(Rare.RainbowFish));
             textViewSkill.setText(Integer.toString(Fishing.Level));
+            Player.AddExperience(this);
 
         }
-        if (Player.CurrentPlot == Inventory.WHEAT && Player.Level >=15){
+        if (Player.CurrentPlot == Inventory.WHEAT && Player.Level >=15 && Farming.IsFarming == false){
+            Farming.IsFarming = true;
             gatherSound.Play(this, R.raw.fishing_sound, Player.isMuted);
             TextView farmTimer = findViewById(R.id.textViewTime);
 
-            new CountDownTimer(30000, 1000) {
+            new CountDownTimer(Farming.Time, 1000) {
 
                 public void onTick(long millisUntilFinished) {
-                    farmTimer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                    farmTimer.setText("Seconds remaining: " + millisUntilFinished / 1000);
                     //here you can have your logic to set text to edittext
                 }
 
                 public void onFinish() {
+
                     Inventory.AddResource(Inventory.WHEAT, activity);
-                    UpdateViews();
+                    Player.AddExperience(activity);
+                    textViewResource.setText(Integer.toString(Inventory.Wheat_Quantity));
+                    textViewRare.setText(Integer.toString(Rare.Giant_Wheat_Seeds));
+                    textViewSkill.setText(Integer.toString(Farming.Level));
+                    Farming.IsFarming = false;
                     farmTimer.setText("Farming complete!");
+
+
                 }
 
             }.start();
 
         }
-            if (Player.CurrentPlot == 99){
-                System.out.println("CANNOT ACCESS");
+            if (Player.CurrentPlot == 99 ){
+
             }
             else {
-                Player.AddExperience(this);
-            }
 
+            }
             ProgressBarSkillLevel();
             ProgressPlayerLevel();
         }
@@ -329,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
             Player.CurrentPlot--;
         }
 
-        System.out.println(Player.CurrentPlot + "");
+
         UpdateViews();
         switch (Player.CurrentPlot){
             case 1:

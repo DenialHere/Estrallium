@@ -44,6 +44,12 @@ public class Rare {
                    DialogueManager.Show(activity, "Rainbow fish", R.drawable.rainbow_fish, 1, Gravity.CENTER, DialogueManager.RAREITEM);
                    rareSound.Play(activity, R.raw.found_item, Player.isMuted);
                }
+           case Inventory.WHEAT:
+               if (rand.nextInt(Base_Rare_Drop_Chance * (1 + Giant_Wheat_Seeds)) == 0){
+                   Giant_Wheat_Seeds = Giant_Wheat_Seeds + 1;
+                   DialogueManager.Show(activity, "Giant wheat seed", R.drawable.artifact, 1, Gravity.CENTER, DialogueManager.RAREITEM);
+                   rareSound.Play(activity, R.raw.found_item, Player.isMuted);
+               }
                break;
 
        }
