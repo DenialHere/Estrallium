@@ -33,7 +33,9 @@ public class Mining {
         Experience = 0;
         SoundPlayer levelUpSound = new SoundPlayer();
         levelUpSound.Play(activity, R.raw.level_up_sound, Player.SoundIsMuted);
-        DialogueManager.Show(activity, Mining.NAME, R.drawable.stone, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
+        if (Player.HideSkillLevelMessages == false) {
+            DialogueManager.Show(activity, Mining.NAME, R.drawable.stone, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
+        }
     }
 
 

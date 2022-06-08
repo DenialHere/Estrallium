@@ -19,7 +19,7 @@ public class Player {
     public static boolean SoundIsMuted = false;
     public static boolean MusicIsMuted = false;
     public static boolean HidePlayerLevelMessages = false;
-
+    public static boolean HideSkillLevelMessages = false;
 
     public static void AddExperience(Activity activity)
     {

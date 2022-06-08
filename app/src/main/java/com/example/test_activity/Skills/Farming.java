@@ -35,7 +35,9 @@ public class Farming {
         Experience = 0;
         SoundPlayer levelUpSound = new SoundPlayer();
         levelUpSound.Play(activity, R.raw.level_up_sound, Player.SoundIsMuted);
-        DialogueManager.Show(activity, NAME, R.drawable.grain, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
+        if (Player.HideSkillLevelMessages == false) {
+            DialogueManager.Show(activity, NAME, R.drawable.grain, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
+        }
     }
 
 

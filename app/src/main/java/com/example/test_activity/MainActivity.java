@@ -23,6 +23,8 @@ import com.example.test_activity.Activities.RefineryActivity;
 import com.example.test_activity.Activities.SettingsActivity;
 import com.example.test_activity.Activities.StoreActivity;
 import com.example.test_activity.Activities.TasksActivity;
+import com.example.test_activity.Activities.TutorialActivity;
+import com.example.test_activity.Inventory.Kingdom;
 import com.example.test_activity.Inventory.Workers;
 import com.example.test_activity.Inventory.Inventory;
 import com.example.test_activity.Inventory.Rare;
@@ -52,12 +54,17 @@ public class MainActivity extends AppCompatActivity {
     static int DIRECTION_LEFT = 2;
     ProgressBar skillLevelPb, playerLevelPb;
     private AdView mAdView;
+    ImageView plotCursor, kingdomCursor;
+
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -121,6 +128,9 @@ public class MainActivity extends AppCompatActivity {
 
         Activity activity = this;
 
+        plotCursor = findViewById(R.id.cursorPlot);
+        kingdomCursor = findViewById(R.id.cursorKingdom);
+        StartTutorial();
 
         /** LOAD PREVIOUS GAME DATA **/
         SaveManager.LoadData(this);
@@ -149,9 +159,10 @@ public class MainActivity extends AppCompatActivity {
         //Updating resources every second
         handler.postDelayed(new Runnable() {
             public void run() {
+                UpdateTutorial();
                 UpdateViews();
                 handler.postDelayed(this, delay);
-                System.out.println("OKKKKKK");
+
             }
         }, delay);
 
@@ -186,7 +197,27 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     }
+
+    public void UpdateTutorial(){
+        if (Tutorial.Done == true && plotCursor.getVisibility() != View.GONE){
+            plotCursor.setVisibility(View.GONE);
+        }
+        if (Inventory.Log_Quantity >= 50 && Tutorial.ClickPlotDone == false){
+            plotCursor.setVisibility(View.GONE);
+            Tutorial.ClickPlotDone = true;
+            Intent intent = new Intent(this, TutorialActivity.class);
+            startActivity(intent);
+        }
+        if (Tutorial.ClickPlotDone == true && Tutorial.KingdomDone == false){
+            kingdomCursor.setVisibility(View.VISIBLE);
+        }
+        if (Kingdom.Level >= 2){
+            kingdomCursor.setVisibility(View.GONE);
+        }
+    }
+
     public void CheatButton(View view){
         Inventory.Log_Quantity = 1000000;
         Inventory.Stone_Quantity = 1000000;
@@ -197,6 +228,10 @@ public class MainActivity extends AppCompatActivity {
     }
     public void TasksButton(View view){
         Intent intent = new Intent(this, TasksActivity.class);
+        startActivity(intent);
+    }
+    public void StartTutorial(){
+        Intent intent = new Intent(this, TutorialActivity.class);
         startActivity(intent);
     }
 

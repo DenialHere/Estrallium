@@ -1,6 +1,7 @@
 package com.example.test_activity.Activities;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 
@@ -10,7 +11,7 @@ import com.example.test_activity.R;
 import com.example.test_activity.Skills.Player;
 
 public class SettingsActivity extends AppCompatActivity {
-    CheckBox muteSounds, muteMusic, hidePlayerLevel;
+    CheckBox muteSounds, muteMusic, hidePlayerLevel, hideSkillLevel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +20,7 @@ public class SettingsActivity extends AppCompatActivity {
         muteSounds = findViewById(R.id.checkBoxSounds);
         muteMusic = findViewById(R.id.checkBoxMusic);
         hidePlayerLevel = findViewById(R.id.checkBoxPlayer);
+        hideSkillLevel = findViewById(R.id.checkBoxSoundsSkill);
 
         if (Player.SoundIsMuted == true){
             muteSounds.toggle();
@@ -28,6 +30,9 @@ public class SettingsActivity extends AppCompatActivity {
         }
         if (Player.HidePlayerLevelMessages == true){
             hidePlayerLevel.toggle();
+        }
+        if (Player.HideSkillLevelMessages == true){
+            hideSkillLevel.toggle();
         }
 
         muteSounds.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
@@ -78,9 +83,27 @@ public class SettingsActivity extends AppCompatActivity {
             }
         });
 
+        hideSkillLevel.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked)
+            {
+                if (isChecked)
+                {
+                    Player.HideSkillLevelMessages = false;
+                }
+                else {
+                    Player.HideSkillLevelMessages = true;
+                }
+
+            }
+        });
+
     }
 
-
+    public void BackButton(View view){
+        finish();
+    }
 
 
 }
