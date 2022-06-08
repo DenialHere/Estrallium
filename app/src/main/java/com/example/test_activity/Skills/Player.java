@@ -15,8 +15,11 @@ public class Player {
     public static String NAME = "You";
     public static int CurrentPlot = 1;
 
-    //TODO: FIND A BETTER SPOT TO PUT THIS
-    public static boolean isMuted = false;
+    //toggleable options
+    public static boolean SoundIsMuted = false;
+    public static boolean MusicIsMuted = false;
+    public static boolean HidePlayerLevelMessages = false;
+
 
     public static void AddExperience(Activity activity)
     {
@@ -31,11 +34,13 @@ public class Player {
         private static void LevelUp(Activity activity)
         {
             SoundPlayer levelUpSound = new SoundPlayer();
-            levelUpSound.Play(activity, R.raw.player_level_up, Player.isMuted);
+            levelUpSound.Play(activity, R.raw.player_level_up, Player.SoundIsMuted);
             Level = Level + 1;
             ExperienceLeft = ExperienceLeft + CalculateExperienceMultiplier(Level);
             Experience = 0;
-            DialogueManager.Show(activity, Player.NAME, R.drawable.player, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
+            if (HidePlayerLevelMessages == false){
+                DialogueManager.Show(activity, Player.NAME, R.drawable.player, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
+            }
         }
 
 

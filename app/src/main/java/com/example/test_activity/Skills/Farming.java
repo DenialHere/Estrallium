@@ -34,7 +34,7 @@ public class Farming {
         ExperienceLeft = ExperienceLeft + CalculateExperienceMultiplier(Level);
         Experience = 0;
         SoundPlayer levelUpSound = new SoundPlayer();
-        levelUpSound.Play(activity, R.raw.level_up_sound, Player.isMuted);
+        levelUpSound.Play(activity, R.raw.level_up_sound, Player.SoundIsMuted);
         DialogueManager.Show(activity, NAME, R.drawable.grain, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
     }
 

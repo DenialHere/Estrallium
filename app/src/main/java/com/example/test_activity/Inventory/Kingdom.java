@@ -2,7 +2,6 @@ package com.example.test_activity.Inventory;
 
 import android.app.Activity;
 import android.view.Gravity;
-import android.widget.ProgressBar;
 
 import com.example.test_activity.Managers.DialogueManager;
 import com.example.test_activity.Managers.SoundPlayer;
@@ -119,7 +118,7 @@ public class Kingdom {
 
             //Play sound
             SoundPlayer levelUpSound = new SoundPlayer();
-            levelUpSound.Play(activity, R.raw.kingdom_levelup, Player.isMuted);
+            levelUpSound.Play(activity, R.raw.kingdom_levelup, Player.SoundIsMuted);
 
             //Leveling up kingdom
             Level = Level + 1;

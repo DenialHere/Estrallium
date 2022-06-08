@@ -207,21 +207,6 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/buttonCheat"
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:layout_weight="0"
-                android:onClick="CheatButton"
-                android:text="Cheat" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:orientation="horizontal">
@@ -259,13 +244,36 @@
                 android:text="Refinery" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/buttonStore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:onClick="StoreButton"
                 android:text="Store" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="SettingsButton"
+                android:text="Settings" />
+
+            <Button
+                android:id="@+id/buttonHelp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="CheatButton"
+                android:text="Help" />
         </LinearLayout>
 
     </LinearLayout>

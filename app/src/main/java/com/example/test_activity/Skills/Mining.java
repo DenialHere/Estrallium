@@ -32,7 +32,7 @@ public class Mining {
         ExperienceLeft = ExperienceLeft + CalculateExperienceMultiplier(Level);
         Experience = 0;
         SoundPlayer levelUpSound = new SoundPlayer();
-        levelUpSound.Play(activity, R.raw.level_up_sound, Player.isMuted);
+        levelUpSound.Play(activity, R.raw.level_up_sound, Player.SoundIsMuted);
         DialogueManager.Show(activity, Mining.NAME, R.drawable.stone, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
     }
 

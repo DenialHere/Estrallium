@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.example.test_activity.Activities.DemandActivity;
 import com.example.test_activity.Activities.KingdomActivity;
 import com.example.test_activity.Activities.RefineryActivity;
+import com.example.test_activity.Activities.SettingsActivity;
 import com.example.test_activity.Activities.StoreActivity;
 import com.example.test_activity.Activities.TasksActivity;
 import com.example.test_activity.Inventory.Workers;
@@ -51,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     static int DIRECTION_LEFT = 2;
     ProgressBar skillLevelPb, playerLevelPb;
     private AdView mAdView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,6 +200,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void SettingsButton(View view){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
     public void StoreButton(View view){
         Intent intent = new Intent(this, StoreActivity.class);
         startActivity(intent);
@@ -297,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
 
             textViewPlayerLevel.setText(Integer.toString(Player.Level));
             if (Player.CurrentPlot == Constants.WOOD){
-                gatherSound.Play(this, R.raw.wood_chop2, Player.isMuted);
+                gatherSound.Play(this, R.raw.wood_chop2, Player.SoundIsMuted);
                 Inventory.AddResource(Inventory.WOOD, this);
                 textViewResource.setText(Integer.toString(Inventory.Log_Quantity));
                 textViewRare.setText(Integer.toString(Rare.Magic_Seeds));
@@ -307,7 +314,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
             if (Player.CurrentPlot == Constants.STONE && Player.Level >=5){
-                gatherSound.Play(this, R.raw.pickaxe, Player.isMuted);
+                gatherSound.Play(this, R.raw.pickaxe, Player.SoundIsMuted);
                 Inventory.AddResource(Inventory.STONE, this);
                 textViewResource.setText(Integer.toString(Inventory.Stone_Quantity));
                 textViewRare.setText(Integer.toString(Rare.Gem));
@@ -316,7 +323,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         if (Player.CurrentPlot == Constants.FISHING && Player.Level >=10){
-            gatherSound.Play(this, R.raw.fishing_sound, Player.isMuted);
+            gatherSound.Play(this, R.raw.fishing_sound, Player.SoundIsMuted);
             Inventory.AddResource(Inventory.FISH, this);
             textViewResource.setText(Integer.toString(Inventory.Fish_Quantity));
             textViewRare.setText(Integer.toString(Rare.RainbowFish));
@@ -326,7 +333,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (Player.CurrentPlot == Inventory.WHEAT && Player.Level >=15 && Farming.IsFarming == false){
             Farming.IsFarming = true;
-            gatherSound.Play(this, R.raw.fishing_sound, Player.isMuted);
+            gatherSound.Play(this, R.raw.fishing_sound, Player.SoundIsMuted);
             TextView farmTimer = findViewById(R.id.textViewTime);
 
             new CountDownTimer(Farming.Time, 1000) {
