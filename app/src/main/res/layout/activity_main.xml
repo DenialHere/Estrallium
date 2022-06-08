@@ -5,6 +5,7 @@
     android:id="@+id/linear_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:backgroundTint="#000000"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -49,7 +50,8 @@
                 android:layout_width="40dp"
                 android:layout_height="20dp"
                 android:layout_marginTop="5dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:progressTint="#4F66EA" />
 
         </LinearLayout>
 
@@ -71,7 +73,8 @@
             android:layout_width="match_parent"
             android:layout_height="20dp"
             android:layout_marginBottom="5dp"
-            android:layout_weight="0" />
+            android:layout_weight="0"
+            android:progressTint="#2DD133" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -189,39 +192,71 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:gravity="center" />
+
         </LinearLayout>
 
-        <Button
-            android:id="@+id/buttonCheat"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_weight="0"
-            android:onClick="CheatButton"
-            android:text="Cheat" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button4"
+            <Button
+                android:id="@+id/buttonCheat"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_weight="0"
+                android:onClick="CheatButton"
+                android:text="Cheat" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:onClick="KingdomButton"
-            android:text="Kingdom" />
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/button2"
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="KingdomButton"
+                android:text="Kingdom" />
+
+            <Button
+                android:id="@+id/buttonTasks"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="TasksButton"
+                android:text="Tasks" />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:onClick="StoreButton"
-            android:text="Store" />
+            android:orientation="horizontal">
 
-        <Button
-            android:onClick="RefineryButton"
-            android:id="@+id/goToRefinery"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="Refinery" />
+            <Button
+                android:id="@+id/goToRefinery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="RefineryButton"
+                android:text="Refinery" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:onClick="StoreButton"
+                android:text="Store" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -33,7 +33,7 @@ public class Mining {
         Experience = 0;
         SoundPlayer levelUpSound = new SoundPlayer();
         levelUpSound.Play(activity, R.raw.level_up_sound, Player.isMuted);
-        DialogueManager.Show(activity, Mining.NAME, R.drawable.ironore, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
+        DialogueManager.Show(activity, Mining.NAME, R.drawable.stone, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
     }
 
 

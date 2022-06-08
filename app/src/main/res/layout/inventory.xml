@@ -26,7 +26,7 @@
         android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView13"
-        app:srcCompat="@drawable/ironore" />
+        app:srcCompat="@drawable/stone" />
 
     <ImageView
         android:id="@+id/imageView15"

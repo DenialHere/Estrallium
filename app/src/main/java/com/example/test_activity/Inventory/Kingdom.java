@@ -2,6 +2,7 @@ package com.example.test_activity.Inventory;
 
 import android.app.Activity;
 import android.view.Gravity;
+import android.widget.ProgressBar;
 
 import com.example.test_activity.Managers.DialogueManager;
 import com.example.test_activity.Managers.SoundPlayer;
@@ -11,6 +12,7 @@ import com.example.test_activity.Skills.Player;
 public class Kingdom {
     public static int Level = 1;
     public static int[] Requirements = {0, 0, 0, 0, 0};
+    public static double Favour = 0;
 
 
     public static void getRequirements(){

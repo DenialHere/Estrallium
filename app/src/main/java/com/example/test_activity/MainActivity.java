@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -18,10 +17,11 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.test_activity.Activities.DemandActivity;
 import com.example.test_activity.Activities.KingdomActivity;
 import com.example.test_activity.Activities.RefineryActivity;
 import com.example.test_activity.Activities.StoreActivity;
-import com.example.test_activity.Inventory.Kingdom;
+import com.example.test_activity.Activities.TasksActivity;
 import com.example.test_activity.Inventory.Workers;
 import com.example.test_activity.Inventory.Inventory;
 import com.example.test_activity.Inventory.Rare;
@@ -32,6 +32,8 @@ import com.example.test_activity.Skills.Fishing;
 import com.example.test_activity.Skills.Mining;
 import com.example.test_activity.Skills.Player;
 import com.example.test_activity.Skills.Woodcutting;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     LinearLayout linearLayout;
@@ -48,14 +50,16 @@ public class MainActivity extends AppCompatActivity {
         skillLevelPb = findViewById(R.id.progressBarSkillLevel);
         playerLevelPb = findViewById(R.id.progressBarPlayerLevel);
 
-        skillLevelPb.setMax((int)Woodcutting.ExperienceLeft);
+        skillLevelPb.setMax((int) Woodcutting.ExperienceLeft);
         skillLevelPb.setProgress(Woodcutting.Experience);
 
-        playerLevelPb.setMax((int)Player.ExperienceLeft);
+        playerLevelPb.setMax((int) Player.ExperienceLeft);
         playerLevelPb.setProgress(Player.Experience);
 
         linearLayout = findViewById(R.id.linear_layout);
         swipeListener = new SwipeListener(linearLayout);
+
+        Activity activity = this;
 
 
         /** LOAD PREVIOUS GAME DATA **/
@@ -63,9 +67,10 @@ public class MainActivity extends AppCompatActivity {
         Handler handler = new Handler();
         int delay = 1000; //milliseconds
 
+
         //Wood workers
-        handler.postDelayed(new Runnable(){
-            public void run(){
+        handler.postDelayed(new Runnable() {
+            public void run() {
                 Workers.AddResource_Worker(Inventory.WOOD);
                 System.out.println(Integer.toString(Workers.MineWorkerSpeed));
                 handler.postDelayed(this, Workers.MineWorkerSpeed);
@@ -73,8 +78,8 @@ public class MainActivity extends AppCompatActivity {
         }, Workers.MineWorkerSpeed);
 
         //Stone workers
-        handler.postDelayed(new Runnable(){
-            public void run(){
+        handler.postDelayed(new Runnable() {
+            public void run() {
                 Workers.AddResource_Worker(Inventory.STONE);
                 System.out.println(Integer.toString(Workers.ForestWorkerSpeed));
                 handler.postDelayed(this, Workers.ForestWorkerSpeed);
@@ -82,12 +87,43 @@ public class MainActivity extends AppCompatActivity {
         }, Workers.ForestWorkerSpeed);
 
         //Updating resources every second
-        handler.postDelayed(new Runnable(){
-            public void run(){
+        handler.postDelayed(new Runnable() {
+            public void run() {
                 UpdateViews();
                 handler.postDelayed(this, delay);
+                System.out.println("OKKKKKK");
             }
         }, delay);
+
+
+
+        //Random event
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                Random rand = new Random(); //instance of random class
+                int chance = rand.nextInt(3);
+                if (chance == 0)
+                {
+                    chance = rand.nextInt(3);
+                    if (chance == 0){
+                        Tasks.GenerateScenario(activity);
+                    }
+                    if (chance == 1){
+                        Tasks.GenerateDemand();
+                        if (Tasks.Demand != ""){
+                            Intent intent = new Intent(activity, DemandActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                    if (chance == 2){
+                        Tasks.GenerateFree(activity);
+                    }
+                }
+                    handler.postDelayed(this, Tasks.TaskTimer);
+
+            }
+        }, Tasks.TaskTimer);
+
 
 
     }
@@ -99,6 +135,11 @@ public class MainActivity extends AppCompatActivity {
         UpdateViews();
 
     }
+    public void TasksButton(View view){
+        Intent intent = new Intent(this, TasksActivity.class);
+        startActivity(intent);
+    }
+
     public void StoreButton(View view){
         Intent intent = new Intent(this, StoreActivity.class);
         startActivity(intent);
@@ -358,7 +399,7 @@ public class MainActivity extends AppCompatActivity {
                 specialItemImg.setImageResource(R.drawable.gem);
                 plotImg.setImageResource(R.drawable.lock);
                 skillImg.setImageResource(R.drawable.miningicon);
-                resourceImg.setImageResource(R.drawable.ironore);
+                resourceImg.setImageResource(R.drawable.stone);
                 resourceTxt.setText(Integer.toString(Inventory.Stone_Quantity));
                 rareTxt.setText(Integer.toString(Rare.Gem));
                 skillTxt.setText(Integer.toString(Mining.Level));

@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.test_activity.Activities.DemandActivity;
 import com.example.test_activity.R;
 
 public class DialogueManager {
@@ -19,6 +20,7 @@ public class DialogueManager {
     public static int LEVELUP = 1;
     public static int RAREITEM = 2;
     public static int MESSAGE = 3;
+    public static Dialog demand;
 
     public static void Show(Activity activity, String name, int picture, int level, int position,
                      int dialogType)
@@ -71,7 +73,7 @@ public class DialogueManager {
         dialog.setContentView(R.layout.dialog);
 
         //Setting levelUpMessage to the textview in level_message.xml
-        TextView textViewDialog = dialog.findViewById(R.id.textViewDialog);
+        TextView textViewDialog = dialog.findViewById(R.id.textViewDemand);
         //The textview is where the level up text will be
         textViewDialog.setText(message);
 
@@ -86,6 +88,7 @@ public class DialogueManager {
         //Displaying the custom dialog
         dialog.show();
     }
+
 
 
 }
