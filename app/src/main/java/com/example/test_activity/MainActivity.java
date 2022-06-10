@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -18,9 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.test_activity.Activities.DemandActivity;
 import com.example.test_activity.Activities.KingdomActivity;
 import com.example.test_activity.Activities.RefineryActivity;
+import com.example.test_activity.Activities.SettingsActivity;
 import com.example.test_activity.Activities.StoreActivity;
+import com.example.test_activity.Activities.TasksActivity;
+import com.example.test_activity.Activities.TutorialActivity;
 import com.example.test_activity.Inventory.Kingdom;
 import com.example.test_activity.Inventory.Workers;
 import com.example.test_activity.Inventory.Inventory;
@@ -32,6 +35,16 @@ import com.example.test_activity.Skills.Fishing;
 import com.example.test_activity.Skills.Mining;
 import com.example.test_activity.Skills.Player;
 import com.example.test_activity.Skills.Woodcutting;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+
+import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     LinearLayout linearLayout;
@@ -40,32 +53,94 @@ public class MainActivity extends AppCompatActivity {
     static int DIRECTION_RIGHT = 1;
     static int DIRECTION_LEFT = 2;
     ProgressBar skillLevelPb, playerLevelPb;
+    private AdView mAdView;
+    ImageView plotCursor, kingdomCursor;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+
+        mAdView = new AdView(this);
+
+        mAdView.setAdSize(AdSize.BANNER);
+
+        mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+        mAdView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
+            }
+
+            @Override
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when an ad opens an overlay that
+                // covers the screen.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdClosed() {
+                // Code to be executed when the user is about to return
+                // to the app after tapping on an ad.
+            }
+        });
+
+
+
         skillLevelPb = findViewById(R.id.progressBarSkillLevel);
         playerLevelPb = findViewById(R.id.progressBarPlayerLevel);
 
-        skillLevelPb.setMax((int)Woodcutting.ExperienceLeft);
+        skillLevelPb.setMax((int) Woodcutting.ExperienceLeft);
         skillLevelPb.setProgress(Woodcutting.Experience);
 
-        playerLevelPb.setMax((int)Player.ExperienceLeft);
+        playerLevelPb.setMax((int) Player.ExperienceLeft);
         playerLevelPb.setProgress(Player.Experience);
 
         linearLayout = findViewById(R.id.linear_layout);
         swipeListener = new SwipeListener(linearLayout);
 
+        Activity activity = this;
+
+        plotCursor = findViewById(R.id.cursorPlot);
+        kingdomCursor = findViewById(R.id.cursorKingdom);
+        StartTutorial();
 
         /** LOAD PREVIOUS GAME DATA **/
         SaveManager.LoadData(this);
         Handler handler = new Handler();
         int delay = 1000; //milliseconds
 
+
         //Wood workers
-        handler.postDelayed(new Runnable(){
-            public void run(){
+        handler.postDelayed(new Runnable() {
+            public void run() {
                 Workers.AddResource_Worker(Inventory.WOOD);
                 System.out.println(Integer.toString(Workers.MineWorkerSpeed));
                 handler.postDelayed(this, Workers.MineWorkerSpeed);
@@ -73,8 +148,8 @@ public class MainActivity extends AppCompatActivity {
         }, Workers.MineWorkerSpeed);
 
         //Stone workers
-        handler.postDelayed(new Runnable(){
-            public void run(){
+        handler.postDelayed(new Runnable() {
+            public void run() {
                 Workers.AddResource_Worker(Inventory.STONE);
                 System.out.println(Integer.toString(Workers.ForestWorkerSpeed));
                 handler.postDelayed(this, Workers.ForestWorkerSpeed);
@@ -82,15 +157,67 @@ public class MainActivity extends AppCompatActivity {
         }, Workers.ForestWorkerSpeed);
 
         //Updating resources every second
-        handler.postDelayed(new Runnable(){
-            public void run(){
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                UpdateTutorial();
                 UpdateViews();
                 handler.postDelayed(this, delay);
+
             }
         }, delay);
 
 
+
+        //Random event
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                Random rand = new Random(); //instance of random class
+                int chance = rand.nextInt(3);
+                if (chance == 0)
+                {
+                    chance = rand.nextInt(3);
+                    if (chance == 0){
+                        Tasks.GenerateScenario(activity);
+                    }
+                    if (chance == 1){
+                        Tasks.GenerateDemand();
+                        if (Tasks.Demand != ""){
+                            Intent intent = new Intent(activity, DemandActivity.class);
+                            startActivity(intent);
+                        }
+                    }
+                    if (chance == 2){
+                        Tasks.GenerateFree(activity);
+                    }
+                }
+                    handler.postDelayed(this, Tasks.TaskTimer);
+
+            }
+        }, Tasks.TaskTimer);
+
+
+
+
     }
+
+    public void UpdateTutorial(){
+        if (Tutorial.Done == true && plotCursor.getVisibility() != View.GONE){
+            plotCursor.setVisibility(View.GONE);
+        }
+        if (Inventory.Log_Quantity >= 50 && Tutorial.ClickPlotDone == false){
+            plotCursor.setVisibility(View.GONE);
+            Tutorial.ClickPlotDone = true;
+            Intent intent = new Intent(this, TutorialActivity.class);
+            startActivity(intent);
+        }
+        if (Tutorial.ClickPlotDone == true && Tutorial.KingdomDone == false){
+            kingdomCursor.setVisibility(View.VISIBLE);
+        }
+        if (Kingdom.Level >= 2){
+            kingdomCursor.setVisibility(View.GONE);
+        }
+    }
+
     public void CheatButton(View view){
         Inventory.Log_Quantity = 1000000;
         Inventory.Stone_Quantity = 1000000;
@@ -99,6 +226,20 @@ public class MainActivity extends AppCompatActivity {
         UpdateViews();
 
     }
+    public void TasksButton(View view){
+        Intent intent = new Intent(this, TasksActivity.class);
+        startActivity(intent);
+    }
+    public void StartTutorial(){
+        Intent intent = new Intent(this, TutorialActivity.class);
+        startActivity(intent);
+    }
+
+    public void SettingsButton(View view){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
     public void StoreButton(View view){
         Intent intent = new Intent(this, StoreActivity.class);
         startActivity(intent);
@@ -198,57 +339,67 @@ public class MainActivity extends AppCompatActivity {
 
             textViewPlayerLevel.setText(Integer.toString(Player.Level));
             if (Player.CurrentPlot == Constants.WOOD){
-                gatherSound.Play(this, R.raw.wood_chop2, Player.isMuted);
+                gatherSound.Play(this, R.raw.wood_chop2, Player.SoundIsMuted);
                 Inventory.AddResource(Inventory.WOOD, this);
                 textViewResource.setText(Integer.toString(Inventory.Log_Quantity));
                 textViewRare.setText(Integer.toString(Rare.Magic_Seeds));
                 textViewSkill.setText(Integer.toString(Woodcutting.Level));
+                Player.AddExperience(this);
 
 
             }
             if (Player.CurrentPlot == Constants.STONE && Player.Level >=5){
-                gatherSound.Play(this, R.raw.pickaxe, Player.isMuted);
+                gatherSound.Play(this, R.raw.pickaxe, Player.SoundIsMuted);
                 Inventory.AddResource(Inventory.STONE, this);
                 textViewResource.setText(Integer.toString(Inventory.Stone_Quantity));
                 textViewRare.setText(Integer.toString(Rare.Gem));
                 textViewSkill.setText(Integer.toString(Mining.Level));
+                Player.AddExperience(this);
 
             }
         if (Player.CurrentPlot == Constants.FISHING && Player.Level >=10){
-            gatherSound.Play(this, R.raw.fishing_sound, Player.isMuted);
+            gatherSound.Play(this, R.raw.fishing_sound, Player.SoundIsMuted);
             Inventory.AddResource(Inventory.FISH, this);
             textViewResource.setText(Integer.toString(Inventory.Fish_Quantity));
             textViewRare.setText(Integer.toString(Rare.RainbowFish));
             textViewSkill.setText(Integer.toString(Fishing.Level));
+            Player.AddExperience(this);
 
         }
-        if (Player.CurrentPlot == Inventory.WHEAT && Player.Level >=15){
-            gatherSound.Play(this, R.raw.fishing_sound, Player.isMuted);
+        if (Player.CurrentPlot == Inventory.WHEAT && Player.Level >=15 && Farming.IsFarming == false){
+            Farming.IsFarming = true;
+            gatherSound.Play(this, R.raw.fishing_sound, Player.SoundIsMuted);
             TextView farmTimer = findViewById(R.id.textViewTime);
 
-            new CountDownTimer(30000, 1000) {
+            new CountDownTimer(Farming.Time, 1000) {
 
                 public void onTick(long millisUntilFinished) {
-                    farmTimer.setText("seconds remaining: " + millisUntilFinished / 1000);
+                    farmTimer.setText("Seconds remaining: " + millisUntilFinished / 1000);
                     //here you can have your logic to set text to edittext
                 }
 
                 public void onFinish() {
+
                     Inventory.AddResource(Inventory.WHEAT, activity);
-                    UpdateViews();
+                    Player.AddExperience(activity);
+                    textViewResource.setText(Integer.toString(Inventory.Wheat_Quantity));
+                    textViewRare.setText(Integer.toString(Rare.Giant_Wheat_Seeds));
+                    textViewSkill.setText(Integer.toString(Farming.Level));
+                    Farming.IsFarming = false;
                     farmTimer.setText("Farming complete!");
+
+
                 }
 
             }.start();
 
         }
-            if (Player.CurrentPlot == 99){
-                System.out.println("CANNOT ACCESS");
+            if (Player.CurrentPlot == 99 ){
+
             }
             else {
-                Player.AddExperience(this);
-            }
 
+            }
             ProgressBarSkillLevel();
             ProgressPlayerLevel();
         }
@@ -329,7 +480,7 @@ public class MainActivity extends AppCompatActivity {
             Player.CurrentPlot--;
         }
 
-        System.out.println(Player.CurrentPlot + "");
+
         UpdateViews();
         switch (Player.CurrentPlot){
             case 1:
@@ -348,7 +499,7 @@ public class MainActivity extends AppCompatActivity {
                 specialItemImg.setImageResource(R.drawable.gem);
                 plotImg.setImageResource(R.drawable.lock);
                 skillImg.setImageResource(R.drawable.miningicon);
-                resourceImg.setImageResource(R.drawable.ironore);
+                resourceImg.setImageResource(R.drawable.stone);
                 resourceTxt.setText(Integer.toString(Inventory.Stone_Quantity));
                 rareTxt.setText(Integer.toString(Rare.Gem));
                 skillTxt.setText(Integer.toString(Mining.Level));

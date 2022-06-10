@@ -3,6 +3,7 @@ package com.example.test_activity.Inventory;
 import android.app.Activity;
 
 import com.example.test_activity.Managers.SaveManager;
+import com.example.test_activity.Skills.Farming;
 import com.example.test_activity.Skills.Fishing;
 import com.example.test_activity.Skills.Mining;
 import com.example.test_activity.Skills.Woodcutting;
@@ -62,9 +63,16 @@ public class Inventory {
                 Fish_Quantity = Fish_Quantity + (Rare.RainbowFish + 1 * Multiplier);
                 break;
             case WHEAT:
-                Multiplier = 1 + Rare.getGiant_Wheat_Seeds();
-                Wheat_Quantity = Wheat_Quantity + Multiplier;
-                System.out.println("testingwheat");
+                Rare.checkForRareDrop(WHEAT, activity);
+                Farming.AddExperience(activity);
+                if (rand.nextInt(101 - Farming.Level) == 0) {
+                    Multiplier = 2;
+                    System.out.println("MEGA HIT");
+                }
+                else {
+                    Multiplier = 1;
+                }
+                Wheat_Quantity = Wheat_Quantity + 4 + (Rare.Giant_Wheat_Seeds + 1 * Multiplier);
                 break;
         }
     }

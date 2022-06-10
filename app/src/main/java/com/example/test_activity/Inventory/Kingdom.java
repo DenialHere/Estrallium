@@ -11,6 +11,7 @@ import com.example.test_activity.Skills.Player;
 public class Kingdom {
     public static int Level = 1;
     public static int[] Requirements = {0, 0, 0, 0, 0};
+    public static double Favour = 0;
 
 
     public static void getRequirements(){
@@ -117,7 +118,7 @@ public class Kingdom {
 
             //Play sound
             SoundPlayer levelUpSound = new SoundPlayer();
-            levelUpSound.Play(activity, R.raw.kingdom_levelup, Player.isMuted);
+            levelUpSound.Play(activity, R.raw.kingdom_levelup, Player.SoundIsMuted);
 
             //Leveling up kingdom
             Level = Level + 1;

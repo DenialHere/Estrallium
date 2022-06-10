@@ -124,7 +124,7 @@ public class SaveManager {
             Woodcutting.Experience = sharedPreferences.getInt("woodcuttingExperience", 0);
             Mining.Experience = sharedPreferences.getInt("miningExperience", 0);
             Fishing.Experience = sharedPreferences.getInt("fishingExperience", 0);
-            Farming.ExperienceLeft = sharedPreferences.getInt("farmingExperience", 0);
+            Farming.Experience = sharedPreferences.getInt("farmingExperience", 0);
 
             /** Load Worker Values **/
             Workers.Forest_Workers = sharedPreferences.getInt("forestWorkers", 0);

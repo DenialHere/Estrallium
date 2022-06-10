@@ -102,8 +102,8 @@
         android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/InventoryButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ironore"
-        tools:srcCompat="@drawable/ironore" />
+        app:srcCompat="@drawable/stone"
+        tools:srcCompat="@drawable/stone" />
 
     <ImageView
         android:id="@+id/imageView5"

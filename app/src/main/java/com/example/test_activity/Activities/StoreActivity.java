@@ -292,7 +292,7 @@ public class StoreActivity extends AppCompatActivity {
                         } else {
                             Inventory.Gold -= Shop.CalculatePrice(stoneQuantity.getText().toString(), Shop.StoneBuyPrice);
                             UpdateCoins();
-                            DialogueManager.ShowMessage(this, "You bought " + stoneQuantity.getText().toString() + " stone", R.drawable.ironore, Gravity.CENTER);
+                            DialogueManager.ShowMessage(this, "You bought " + stoneQuantity.getText().toString() + " stone", R.drawable.stone, Gravity.CENTER);
                             Inventory.Stone_Quantity += Integer.parseInt(stoneQuantity.getText().toString());
                         }
 
@@ -301,12 +301,12 @@ public class StoreActivity extends AppCompatActivity {
                     else
                     {
                         if (Integer.parseInt(stoneQuantity.getText().toString()) > Inventory.Stone_Quantity) {
-                            DialogueManager.ShowMessage(this, " You don't have enough Stone", R.drawable.ironore, Gravity.CENTER);
+                            DialogueManager.ShowMessage(this, " You don't have enough Stone", R.drawable.stone, Gravity.CENTER);
                         } else {
                             Inventory.Gold += Shop.CalculatePrice(stoneQuantity.getText().toString(), Shop.StoneSellPrice);
                             UpdateCoins();
                             UpdateSellAmounts();
-                            DialogueManager.ShowMessage(this, "You Sold " + stoneQuantity.getText().toString() + " Stone" , R.drawable.ironore, Gravity.CENTER);
+                            DialogueManager.ShowMessage(this, "You Sold " + stoneQuantity.getText().toString() + " Stone" , R.drawable.stone, Gravity.CENTER);
                             Inventory.Stone_Quantity -= Integer.parseInt(stoneQuantity.getText().toString());
                         }
                     }

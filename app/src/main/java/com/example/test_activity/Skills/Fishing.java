@@ -33,8 +33,10 @@ public class Fishing {
         ExperienceLeft = ExperienceLeft + CalculateExperienceMultiplier(Level);
         Experience = 0;
         SoundPlayer levelUpSound = new SoundPlayer();
-        levelUpSound.Play(activity, R.raw.level_up_sound, Player.isMuted);
-        DialogueManager.Show(activity, Fishing.NAME, R.drawable.trout, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
+        levelUpSound.Play(activity, R.raw.level_up_sound, Player.SoundIsMuted);
+        if (Player.HideSkillLevelMessages == false) {
+            DialogueManager.Show(activity, Fishing.NAME, R.drawable.trout, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
+        }
     }
 
 

@@ -1,13 +1,11 @@
 package com.example.test_activity.Skills;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.view.Gravity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.test_activity.Inventory.Workers;
-import com.example.test_activity.MainActivity;
 import com.example.test_activity.Managers.DialogueManager;
 import com.example.test_activity.Managers.SoundPlayer;
 import com.example.test_activity.R;
@@ -40,8 +38,10 @@ public class Woodcutting extends AppCompatActivity {
         ExperienceLeft = ExperienceLeft + CalculateExperienceMultiplier(Level);
         Experience = 0;
         SoundPlayer levelUpSound = new SoundPlayer();
-        levelUpSound.Play(activity, R.raw.level_up_sound, Player.isMuted);
-        DialogueManager.Show(activity, Woodcutting.NAME, R.drawable.logs, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
+        levelUpSound.Play(activity, R.raw.level_up_sound, Player.SoundIsMuted);
+        if (Player.HideSkillLevelMessages == false) {
+            DialogueManager.Show(activity, Woodcutting.NAME, R.drawable.logs, Level, Gravity.BOTTOM, DialogueManager.LEVELUP);
+        }
     }
 
 

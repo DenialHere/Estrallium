@@ -9,7 +9,6 @@ public class SoundPlayer {
     //Creating a new mediaPlayer that will be used for all sound effects
     MediaPlayer soundEffect;
 
-
     /**   To play a sound pass the activity you're in, the sound you wish to play and if sound has
      *    been muted by the player
      *    Ex:  SoundPlayer sm = new SoundPlayer();

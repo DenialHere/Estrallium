@@ -33,6 +33,31 @@
             android:exported="true"
             >
         </activity>
+        <activity
+            android:name=".Activities.TasksActivity"
+            android:exported="true"
+            >
+        </activity>
+        <activity
+            android:name=".Activities.DemandActivity"
+            android:exported="true"
+            >
+        </activity>
+        <activity
+            android:name=".Activities.SettingsActivity"
+            android:exported="true"
+            >
+        </activity>
+        <activity
+            android:name=".Activities.TutorialActivity"
+            android:exported="true"
+            >
+        </activity>
+        <!-- Sample AdMob app ID: ca-app-pub-3940256099942544~3347511713 -->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
+
     </application>
 
 </manifest>
