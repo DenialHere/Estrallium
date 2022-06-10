@@ -37,7 +37,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="20dp"
         android:layout_weight="0"
-        android:src="@drawable/forestbackground"
+        android:src="@drawable/forest_background"
         android:tag="1"
         tools:ignore="SpeakableTextPresentCheck" />
 
