@@ -12,10 +12,17 @@ import com.example.test_activity.Inventory.Inventory;
 import com.example.test_activity.Inventory.Kingdom;
 import com.example.test_activity.R;
 import com.example.test_activity.Skills.Player;
+import com.example.test_activity.Tasks;
 
 public class KingdomActivity extends AppCompatActivity {
 
     ProgressBar favourPb;
+
+    @Override
+    public void onBackPressed() {
+        Tasks.IsEnabled = true;
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

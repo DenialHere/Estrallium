@@ -3,6 +3,7 @@ package com.example.test_activity.Activities;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,27 +16,38 @@ import com.example.test_activity.Tutorial;
 
 public class TutorialActivity extends AppCompatActivity {
     TextView dialog;
+    Button btnNo;
+
+    @Override
+    public void onBackPressed() {
+        Tasks.IsEnabled = true;
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tutorial);
         dialog = findViewById(R.id.textViewDialog);
+        btnNo = findViewById(R.id.buttonNo);
 
-        if (Tutorial.ClickPlotDone == false){
-            dialog.setText("Your wish has been granted! \n But that doesn't mean that it's going be easy. \n You are now in charge of your very own kingdom, but theres still lots to do before you can can call it home. \n Why don't you start off by collecting some logs?");
+        Tasks.IsEnabled = false;
+        //Hide skip tutorial button
+        if (Tutorial.ClickPlotDone == true){
+            btnNo.setVisibility(View.GONE);
         }
-        else if (Tutorial.KingdomDone == false){
-            dialog.setText("You have enough resources to upgrade your kingdom! \n Click on the kingdom button to upgrade.");
-        }
+
+        dialog.setText(Tutorial.Message);
+
     }
 
     public void OkButton(View view){
-        System.out.println("TUTORIAL YES");
+        Tasks.IsEnabled = true;
         finish();
     }
 
     public void NoButton(View view){
+        Tasks.IsEnabled = true;
         Tutorial.Done = true;
         finish();
     }

@@ -9,9 +9,16 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.test_activity.R;
 import com.example.test_activity.Skills.Player;
+import com.example.test_activity.Tasks;
 
 public class SettingsActivity extends AppCompatActivity {
     CheckBox muteSounds, muteMusic, hidePlayerLevel, hideSkillLevel;
+
+    @Override
+    public void onBackPressed() {
+        Tasks.IsEnabled = true;
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

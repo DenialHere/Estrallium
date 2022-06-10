@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
     static int DIRECTION_LEFT = 2;
     ProgressBar skillLevelPb, playerLevelPb;
     private AdView mAdView;
-    ImageView plotCursor, kingdomCursor;
+    ImageView plotCursor, kingdomCursor, swipeCursor, storeCursor;
 
 
 
@@ -63,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -130,6 +129,8 @@ public class MainActivity extends AppCompatActivity {
 
         plotCursor = findViewById(R.id.cursorPlot);
         kingdomCursor = findViewById(R.id.cursorKingdom);
+        swipeCursor = findViewById(R.id.swipe);
+        storeCursor = findViewById(R.id.cursorStore);
         StartTutorial();
 
         /** LOAD PREVIOUS GAME DATA **/
@@ -173,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 Random rand = new Random(); //instance of random class
                 int chance = rand.nextInt(3);
-                if (chance == 0)
+                if (chance == 0 && Tasks.IsEnabled == true)
                 {
                     chance = rand.nextInt(3);
                     if (chance == 0){
@@ -204,47 +205,85 @@ public class MainActivity extends AppCompatActivity {
         if (Tutorial.Done == true && plotCursor.getVisibility() != View.GONE){
             plotCursor.setVisibility(View.GONE);
         }
-        if (Inventory.Log_Quantity >= 50 && Tutorial.ClickPlotDone == false){
+        if (Inventory.Log_Quantity >= 50 && Tutorial.ClickPlotDone == false && Player.Level >= 2){
             plotCursor.setVisibility(View.GONE);
             Tutorial.ClickPlotDone = true;
+            Tutorial.Message = "You have enough resources to upgrade your kingdom! \n Click on the kingdom button to upgrade.";
             Intent intent = new Intent(this, TutorialActivity.class);
             startActivity(intent);
         }
         if (Tutorial.ClickPlotDone == true && Tutorial.KingdomDone == false){
             kingdomCursor.setVisibility(View.VISIBLE);
         }
-        if (Kingdom.Level >= 2){
+        if (Kingdom.Level >= 2 && Tutorial.KingdomDone == false){
             kingdomCursor.setVisibility(View.GONE);
+            Tutorial.KingdomDone = true;
+        }
+        if (Kingdom.Level >= 3 && Tutorial.StoreDone == false){
+            Tutorial.Message = "You got some gold finally! \n Why don't you try buying something from the shop?";
+            Intent intent = new Intent(this, TutorialActivity.class);
+            startActivity(intent);
+            storeCursor.setVisibility(View.VISIBLE);
+            Tutorial.StoreDone = true;
+        }
+        if (Tutorial.StoreClicked == true){
+            storeCursor.setVisibility(View.GONE);
+        }
+        if (Player.Level >= Constants.miningLevelRequiredForPlot && Tutorial.SwipeDone1 == false){
+            Tutorial.Message = "You need more than just wood to create a kingdom! \n Swipe right to switch to the stone plot. \n Swiping left will bring you back.";
+            Intent intent = new Intent(this, TutorialActivity.class);
+            startActivity(intent);
+            swipeCursor.setVisibility(View.VISIBLE);
+            Tutorial.SwipeDone1 = true;
+        }
+        if (Tutorial.SwipeDone1 == true && Player.CurrentPlot == Inventory.STONE && Tutorial.SwipeDone2 == false){
+            swipeCursor.setVisibility(View.GONE);
+            plotCursor.setVisibility(View.VISIBLE);
+            Tutorial.SwipeDone2 = true;
+        }
+        if (Inventory.Stone_Quantity >= 15 && Tutorial.SwipeDone3 == false){
+            plotCursor.setVisibility(View.GONE);
+            Tutorial.SwipeDone3 = true;
         }
     }
 
     public void CheatButton(View view){
         Inventory.Log_Quantity = 1000000;
-        Inventory.Stone_Quantity = 1000000;
+        //Inventory.Stone_Quantity = 1000000;
         Inventory.Fish_Quantity = 1000000;
         Player.Level = 1000;
         UpdateViews();
 
     }
     public void TasksButton(View view){
+        Tasks.IsEnabled = false;
         Intent intent = new Intent(this, TasksActivity.class);
         startActivity(intent);
     }
     public void StartTutorial(){
+        Tasks.IsEnabled = false;
         Intent intent = new Intent(this, TutorialActivity.class);
         startActivity(intent);
     }
 
     public void SettingsButton(View view){
+        Tasks.IsEnabled = false;
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
     public void StoreButton(View view){
+        Tasks.IsEnabled = false;
+
+        if (Tutorial.StoreDone == true && Tutorial.StoreClicked == false){
+            Tutorial.StoreClicked = true;
+        }
+
         Intent intent = new Intent(this, StoreActivity.class);
         startActivity(intent);
     }
     public void RefineryButton(View view){
+        Tasks.IsEnabled = false;
         Intent intent = new Intent(this, RefineryActivity.class);
         startActivity(intent);
     }

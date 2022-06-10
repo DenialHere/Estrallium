@@ -17,6 +17,7 @@ import com.example.test_activity.Inventory.Shop;
 import com.example.test_activity.Managers.DialogueManager;
 import com.example.test_activity.R;
 import com.example.test_activity.Skills.Player;
+import com.example.test_activity.Tasks;
 
 public class StoreActivity extends AppCompatActivity {
     TextView logsPricePer, stonePricePer, fishPricePer, farmPricePer,
@@ -25,6 +26,11 @@ public class StoreActivity extends AppCompatActivity {
     EditText logQuantity,stoneQuantity,fishQuantity,farmQuantity;
     Button btnBuyLogs, btnBuyStone, btnBuyFish, btnBuyFarm, btnBuySell;
 
+    @Override
+    public void onBackPressed() {
+        Tasks.IsEnabled = true;
+        finish();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

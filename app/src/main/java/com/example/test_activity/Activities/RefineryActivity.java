@@ -13,12 +13,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.test_activity.Inventory.Inventory;
 import com.example.test_activity.Inventory.Refinery;
 import com.example.test_activity.R;
+import com.example.test_activity.Tasks;
 
 public class RefineryActivity extends AppCompatActivity {
 
     static TextView amount, previewbox;
     static CheckBox bricks,gravel,mortar,lumber,planks,sawdust,bread,stew,sandwich,oil,fillet,bones;
-
+    @Override
+    public void onBackPressed() {
+        Tasks.IsEnabled = true;
+        finish();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

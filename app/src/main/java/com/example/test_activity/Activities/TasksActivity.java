@@ -23,6 +23,11 @@ public class TasksActivity extends AppCompatActivity {
     Button task0Button,task1Button,task2Button, task3Button;
 
     @Override
+    public void onBackPressed() {
+        Tasks.IsEnabled = true;
+        finish();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasks);
