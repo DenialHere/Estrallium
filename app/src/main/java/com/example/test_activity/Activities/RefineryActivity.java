@@ -63,7 +63,7 @@ public class RefineryActivity extends AppCompatActivity {
             iscraftinglumber = true;
 
             craftingtime = totalToCraft * 3000;
-
+            //new merge
             double twelvepercent = craftingtime /1000 * 0.125;
             double twentyfivepercent = craftingtime /1000 * 0.25;
             double thirtysevenpercent = craftingtime /1000  * 0.37;
