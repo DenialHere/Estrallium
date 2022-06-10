@@ -5,6 +5,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
@@ -16,372 +17,343 @@ import com.example.test_activity.R;
 
 public class RefineryActivity extends AppCompatActivity {
 
-    static TextView amount, previewbox;
-    static CheckBox bricks,gravel,mortar,lumber,planks,sawdust,bread,stew,sandwich,oil,fillet,bones;
+   TextView LumberQuantityText, BreadQuantityText, FilletQuantityText, BrickQuantityText, task1time, task2time, task3time, task4time;
+   ImageView task1bar, task2bar, task3bar, task4bar;
+
+    static boolean iscraftinglumber = false;
+    static boolean iscraftingbricks = false;
+    static boolean iscraftingfillets = false;
+    static boolean iscraftingbreads = false;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.refinery);
+        task1time = findViewById(R.id.task1time);
+        task2time = findViewById(R.id.task2time);
+        task3time = findViewById(R.id.task3time);
+        task4time = findViewById(R.id.task4time);
+        LumberQuantityText = findViewById(R.id.LumberQuantityText);
+        BreadQuantityText = findViewById(R.id.BreadQuantityText);
+        FilletQuantityText = findViewById(R.id.FilletQuantityText);
+        BrickQuantityText = findViewById(R.id.BrickQuantityText);
+        task1bar = findViewById(R.id.task1bar);
+        task2bar = findViewById(R.id.task2bar);
+        task3bar = findViewById(R.id.task3bar);
+        task4bar = findViewById(R.id.task4bar);
 
-        amount = findViewById(R.id.quantityboxrefinery);
-        previewbox = findViewById(R.id.previewbox);
-
-        bricks = findViewById(R.id.brickbox);
-        gravel = findViewById(R.id.gravelbox);
-        mortar = findViewById(R.id.mortarbox);
-
-        lumber = findViewById(R.id.lumberbox);
-        planks = findViewById(R.id.plankbox);
-        sawdust = findViewById(R.id.sawdustbox);
-
-        bread = findViewById(R.id.breadbox);
-        stew = findViewById(R.id.stewbox);
-        sandwich = findViewById(R.id.sandwichbox);
-
-        oil = findViewById(R.id.oilbox);
-        fillet = findViewById(R.id.filletbox);
-        bones = findViewById(R.id.bonesbox);
     }
 
-    public void Refine(View view){
+    public void LumberTask(View view){
 
         int craftingcost = 0;
         int craftingtime = 0;
+        int totalToCraft = Integer.parseInt(LumberQuantityText.getText().toString());
 
-        if (bricks.isChecked()){
+        if (totalToCraft == 0){
 
-           craftingcost = Integer.parseInt(amount.getText().toString()) * 5;
-
-           if (Inventory.Stone_Quantity > craftingcost){
-
-               craftingtime = Integer.parseInt(amount.getText().toString()) * 10000;
-
-               int finalCraftingcost = craftingcost;
-               new CountDownTimer(craftingtime, 1000) {
-
-                   public void onTick(long millisUntilFinished) {
-                       previewbox.setText("seconds remaining: " + millisUntilFinished / 1000);
-                       //here you can have your logic to set text to edittext
-                   }
-
-                   public void onFinish() {
-                       Refinery.CraftBrick(Integer.parseInt(amount.getText().toString()));
-                       Inventory.Stone_Quantity = Inventory.Stone_Quantity - finalCraftingcost;
-                       previewbox.setText("Bricks are done!");
-                   }
-
-               }.start();
-
-           }else{
-
-               System.out.println("Not enough crafting Materials!");
-
-           }
-        }else if (gravel.isChecked()){
-
-            craftingcost = Integer.parseInt(amount.getText().toString()) * 3;
-
-            if (Inventory.Stone_Quantity > craftingcost){
-
-                craftingtime = Integer.parseInt(amount.getText().toString()) * 8000;
-
-                int finalCraftingcost = craftingcost;
-                new CountDownTimer(craftingtime, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-                        previewbox.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        //here you can have your logic to set text to edittext
-                    }
-
-                    public void onFinish() {
-                        Refinery.CraftGravel(Integer.parseInt(amount.getText().toString()));
-                        Inventory.Stone_Quantity = Inventory.Stone_Quantity - finalCraftingcost;
-                        previewbox.setText("Gravel is done!");
-                        System.out.println(Refinery.Gravel);
-                    }
-
-                }.start();
-            }else{
-
-                System.out.println("Not enough crafting Materials!");
-
-            }
-        }else if (mortar.isChecked()){
-            craftingcost = Integer.parseInt(amount.getText().toString()) * 70;
-
-            if (Inventory.Stone_Quantity > craftingcost){
-
-                craftingtime = Integer.parseInt(amount.getText().toString()) * 35000;
-
-                int finalCraftingcost = craftingcost;
-                new CountDownTimer(craftingtime, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-                        previewbox.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        //here you can have your logic to set text to edittext
-                    }
-
-                    public void onFinish() {
-                        Refinery.CraftMortar(Integer.parseInt(amount.getText().toString()));
-                        Inventory.Stone_Quantity = Inventory.Stone_Quantity - finalCraftingcost;
-                        previewbox.setText("Mortar is done!");
-                        System.out.println(Refinery.Mortar);
-                    }
-
-                }.start();
-            }else{
-
-                System.out.println("Not enough crafting Materials!");
-
-            }
-        }else if (lumber.isChecked()){
-            craftingcost = Integer.parseInt(amount.getText().toString()) * 2;
-
-            if (Inventory.Log_Quantity > craftingcost){
-
-                int finalCraftingcost = craftingcost;
-                new CountDownTimer(craftingtime, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-                        previewbox.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        //here you can have your logic to set text to edittext
-                    }
-
-                    public void onFinish() {
-                        Refinery.CraftLumber(Integer.parseInt(amount.getText().toString()));
-                        Inventory.Log_Quantity = Inventory.Log_Quantity - finalCraftingcost;
-                        previewbox.setText("Lumber is done!");
-                        System.out.println(Refinery.Lumber);
-                    }
-
-                }.start();
-            }else{
-
-                System.out.println("Not enough crafting Materials!");
-
-            }
-        }else if (planks.isChecked()){
-            craftingcost = Integer.parseInt(amount.getText().toString()) * 10;
-
-            if (Inventory.Log_Quantity > craftingcost){
-
-                int finalCraftingcost = craftingcost;
-                new CountDownTimer(craftingtime, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-                        previewbox.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        //here you can have your logic to set text to edittext
-                    }
-
-                    public void onFinish() {
-                        Refinery.CraftPlank(Integer.parseInt(amount.getText().toString()));
-                        Inventory.Log_Quantity = Inventory.Log_Quantity - finalCraftingcost;
-                        previewbox.setText("Planks are done!");
-                        System.out.println(Refinery.Plank);
-                    }
-
-                }.start();
-            }else{
-
-                System.out.println("Not enough crafting Materials!");
-
-            }
-        }else if (sawdust.isChecked()){
-            craftingcost = Integer.parseInt(amount.getText().toString()) * 1;
-
-            if (Inventory.Log_Quantity > craftingcost){
-
-                int finalCraftingcost = craftingcost;
-                new CountDownTimer(craftingtime, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-                        previewbox.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        //here you can have your logic to set text to edittext
-                    }
-
-                    public void onFinish() {
-                        Refinery.CraftSawdust(Integer.parseInt(amount.getText().toString()));
-                        Inventory.Log_Quantity = Inventory.Log_Quantity - finalCraftingcost;
-                        previewbox.setText("Sawdust is done!");
-                        System.out.println(Refinery.Sawdust);
-                    }
-
-                }.start();
-            }else{
-
-                System.out.println("Not enough crafting Materials!");
-
-            }
-        }else if (bread.isChecked()){
-            craftingcost = Integer.parseInt(amount.getText().toString()) * 70;
-
-            if (Inventory.Wheat_Quantity > craftingcost){
-
-                int finalCraftingcost = craftingcost;
-                new CountDownTimer(craftingtime, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-                        previewbox.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        //here you can have your logic to set text to edittext
-                    }
-
-                    public void onFinish() {
-                        Refinery.CraftBread(Integer.parseInt(amount.getText().toString()));
-                        Inventory.Wheat_Quantity = Inventory.Wheat_Quantity - finalCraftingcost;
-                        previewbox.setText("Bread is done!");
-                        System.out.println(Refinery.Bread);
-                    }
-
-                }.start();
-
-            }else{
-
-                System.out.println("Not enough crafting Materials!");
-
-            }
-        }else if (stew.isChecked()){
-            craftingcost = Integer.parseInt(amount.getText().toString()) * 70;
-
-            if (Inventory.Wheat_Quantity > craftingcost){
-
-                int finalCraftingcost = craftingcost;
-                new CountDownTimer(craftingtime, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-                        previewbox.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        //here you can have your logic to set text to edittext
-                    }
-
-                    public void onFinish() {
-                        Refinery.CraftStew(Integer.parseInt(amount.getText().toString()));
-                        Inventory.Wheat_Quantity = Inventory.Wheat_Quantity - finalCraftingcost;
-                        previewbox.setText("Stew is done!");
-                        System.out.println(Refinery.Stew);
-                    }
-
-                }.start();
-
-            }else{
-
-                System.out.println("Not enough crafting Materials!");
-
-            }
-        }else if (sandwich.isChecked()){
-            craftingcost = Integer.parseInt(amount.getText().toString()) * 70;
-
-            if (Inventory.Wheat_Quantity > craftingcost){
-
-                int finalCraftingcost = craftingcost;
-                new CountDownTimer(craftingtime, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-                        previewbox.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        //here you can have your logic to set text to edittext
-                    }
-
-                    public void onFinish() {
-                        Refinery.CraftStew(Integer.parseInt(amount.getText().toString()));
-                        Inventory.Wheat_Quantity = Inventory.Wheat_Quantity - finalCraftingcost;
-                        previewbox.setText("Sandwich is done!");
-                        System.out.println(Refinery.Sandwich);
-                    }
-
-                }.start();
-
-            }else{
-
-                System.out.println("Not enough crafting Materials!");
-
-            }
-        }else if (oil.isChecked()){
-            craftingcost = Integer.parseInt(amount.getText().toString()) * 70;
-
-            if (Inventory.Fish_Quantity > craftingcost){
-
-                int finalCraftingcost = craftingcost;
-                new CountDownTimer(craftingtime, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-                        previewbox.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        //here you can have your logic to set text to edittext
-                    }
-
-                    public void onFinish() {
-                        Refinery.CraftStew(Integer.parseInt(amount.getText().toString()));
-                        Inventory.Fish_Quantity = Inventory.Fish_Quantity - finalCraftingcost;
-                        previewbox.setText("Fish oil is done!");
-                        System.out.println(Refinery.Oil);
-                    }
-
-                }.start();
-
-            }else{
-
-                System.out.println("Not enough crafting Materials!");
-
-            }
-        }else if (fillet.isChecked()){
-            craftingcost = Integer.parseInt(amount.getText().toString()) * 70;
-
-            if (Inventory.Fish_Quantity > craftingcost){
-
-                int finalCraftingcost = craftingcost;
-                new CountDownTimer(craftingtime, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-                        previewbox.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        //here you can have your logic to set text to edittext
-                    }
-
-                    public void onFinish() {
-                        Refinery.CraftStew(Integer.parseInt(amount.getText().toString()));
-                        Inventory.Fish_Quantity = Inventory.Fish_Quantity - finalCraftingcost;
-                        previewbox.setText("Fillets are done!");
-                        System.out.println(Refinery.Fillet);
-                    }
-
-                }.start();
-
-            }else{
-
-                System.out.println("Not enough crafting Materials!");
-
-            }
-        }else if (bones.isChecked()){
-            craftingcost = Integer.parseInt(amount.getText().toString()) * 70;
-
-            if (Inventory.Fish_Quantity > craftingcost){
-
-                int finalCraftingcost = craftingcost;
-                new CountDownTimer(craftingtime, 1000) {
-
-                    public void onTick(long millisUntilFinished) {
-                        previewbox.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        //here you can have your logic to set text to edittext
-                    }
-
-                    public void onFinish() {
-                        Refinery.CraftStew(Integer.parseInt(amount.getText().toString()));
-                        Inventory.Fish_Quantity = Inventory.Fish_Quantity - finalCraftingcost;
-                        previewbox.setText("Bones are done!");
-                        System.out.println(Refinery.Bones);
-                    }
-
-                }.start();
-
-            }else{
-
-                System.out.println("Not enough crafting Materials!");
-
-            }
-        }else{
-
-            System.out.println("Nothing refined...");
-
+            return;
         }
 
+        craftingcost = totalToCraft * 35;
+
+        if(Inventory.Log_Quantity > craftingcost && iscraftinglumber == false){
+
+            iscraftinglumber = true;
+
+            craftingtime = totalToCraft * 3000;
+
+            double twelvepercent = craftingtime /1000 * 0.125;
+            double twentyfivepercent = craftingtime /1000 * 0.25;
+            double thirtysevenpercent = craftingtime /1000  * 0.37;
+            double fiftypercent = craftingtime /1000  * 0.50;
+            double sixtytwopercent = craftingtime /1000  * 0.625;
+            double seventyfivepercent = craftingtime /1000  * 0.75;
+            double eightysevenpercent = craftingtime /1000  * 0.8725;
+            double onehundredpercent = craftingtime /1000  * 0.96;
+
+            int finalCraftingcost = craftingcost;
+            new CountDownTimer(craftingtime, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    task1time.setText(String.valueOf(millisUntilFinished/1000));
+                    System.out.println(millisUntilFinished);
+                    System.out.println(twelvepercent);
+                    task1bar.setImageResource(R.drawable.zerobar);
+                    System.out.println(millisUntilFinished / 1000);
+                    if(millisUntilFinished/1000 < twelvepercent){
+                        System.out.println("12% loop");
+                        task1bar.setImageResource(R.drawable.sevenbar);
+                    }else if(millisUntilFinished/1000 < twentyfivepercent){
+                        System.out.println("25% loop");
+                        task1bar.setImageResource(R.drawable.sixbar);
+                    }else if(millisUntilFinished/1000 < thirtysevenpercent){
+                        System.out.println("37% loop");
+                        task1bar.setImageResource(R.drawable.fivebar);
+                    }else if(millisUntilFinished/1000 < fiftypercent){
+                        System.out.println("50% loop");
+                        task1bar.setImageResource(R.drawable.fourbar);
+                    }else if(millisUntilFinished/1000 < sixtytwopercent){
+                        System.out.println("62% loop");
+                        task1bar.setImageResource(R.drawable.threebar);
+                    }else if(millisUntilFinished/1000 < seventyfivepercent){
+                        System.out.println("75% loop");
+                        task1bar.setImageResource(R.drawable.twobar);
+                    }else if(millisUntilFinished/1000 < eightysevenpercent){
+                        System.out.println("87% loop");
+                        task1bar.setImageResource(R.drawable.onebar);
+                    }else if(millisUntilFinished/1000 < onehundredpercent){
+                        System.out.println("100% loop");
+                        task1bar.setImageResource(R.drawable.zerobar);
+                    }
+                }
+                public void onFinish() {
+                    Refinery.CraftLumber(totalToCraft);
+                    Inventory.Log_Quantity = Inventory.Log_Quantity - finalCraftingcost;
+                    task1bar.setImageResource(R.drawable.completebar);
+                    iscraftinglumber = false;
+                    task1time.setText("Complete!");
+                }
+            }.start();
+        }
+        else {
+            System.out.println("Already Crafting Lumber!");
+            return;
+
+        }
     }
 
+    public void BrickTask(View view){
+        int craftingcost = 0;
+        int craftingtime = 0;
+        int totalToCraft = Integer.parseInt(BrickQuantityText.getText().toString());
+
+        if (totalToCraft == 0){
+
+            return;
+        }
+
+        craftingcost = totalToCraft * 35;
+
+        if(Inventory.Stone_Quantity > craftingcost && iscraftingbricks == false){
+
+            iscraftingbricks = true;
+
+            craftingtime = totalToCraft * 3000;
+
+            double twelvepercent = craftingtime /1000 * 0.125;
+            double twentyfivepercent = craftingtime /1000 * 0.25;
+            double thirtysevenpercent = craftingtime /1000  * 0.37;
+            double fiftypercent = craftingtime /1000  * 0.50;
+            double sixtytwopercent = craftingtime /1000  * 0.625;
+            double seventyfivepercent = craftingtime /1000  * 0.75;
+            double eightysevenpercent = craftingtime /1000  * 0.8725;
+            double onehundredpercent = craftingtime /1000  * 0.96;
+
+            int finalCraftingcost = craftingcost;
+            new CountDownTimer(craftingtime, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    task2time.setText(String.valueOf(millisUntilFinished/1000));
+                    System.out.println(millisUntilFinished);
+                    System.out.println(twelvepercent);
+                    task2bar.setImageResource(R.drawable.zerobar);
+                    System.out.println(millisUntilFinished / 1000);
+                    if(millisUntilFinished/1000 < twelvepercent){
+                        System.out.println("12% loop");
+                        task2bar.setImageResource(R.drawable.sevenbar);
+                    }else if(millisUntilFinished/1000 < twentyfivepercent){
+                        System.out.println("25% loop");
+                        task2bar.setImageResource(R.drawable.sixbar);
+                    }else if(millisUntilFinished/1000 < thirtysevenpercent){
+                        System.out.println("37% loop");
+                        task2bar.setImageResource(R.drawable.fivebar);
+                    }else if(millisUntilFinished/1000 < fiftypercent){
+                        System.out.println("50% loop");
+                        task2bar.setImageResource(R.drawable.fourbar);
+                    }else if(millisUntilFinished/1000 < sixtytwopercent){
+                        System.out.println("62% loop");
+                        task2bar.setImageResource(R.drawable.threebar);
+                    }else if(millisUntilFinished/1000 < seventyfivepercent){
+                        System.out.println("75% loop");
+                        task2bar.setImageResource(R.drawable.twobar);
+                    }else if(millisUntilFinished/1000 < eightysevenpercent){
+                        System.out.println("87% loop");
+                        task2bar.setImageResource(R.drawable.onebar);
+                    }else if(millisUntilFinished/1000 < onehundredpercent){
+                        System.out.println("100% loop");
+                        task2bar.setImageResource(R.drawable.zerobar);
+                    }
+                }
+                public void onFinish() {
+                    Refinery.CraftLumber(totalToCraft);
+                    Inventory.Stone_Quantity = Inventory.Stone_Quantity - finalCraftingcost;
+                    task2bar.setImageResource(R.drawable.completebar);
+                    iscraftingbricks = false;
+                    task2time.setText("Complete!");
+                }
+            }.start();
+        }
+        else {
+            System.out.println("Already Crafting Bricks!");
+            return;
+
+        }
+    }
+    public void FilletTask(View view){
+
+        int craftingcost = 0;
+        int craftingtime = 0;
+        int totalToCraft = Integer.parseInt(FilletQuantityText.getText().toString());
+
+        if (totalToCraft == 0){
+
+            return;
+        }
+
+        craftingcost = totalToCraft * 35;
+
+        if(Inventory.Fish_Quantity > craftingcost && iscraftingfillets == false){
+
+            iscraftingfillets = true;
+
+            craftingtime = totalToCraft * 3000;
+
+            double twelvepercent = craftingtime /1000 * 0.125;
+            double twentyfivepercent = craftingtime /1000 * 0.25;
+            double thirtysevenpercent = craftingtime /1000  * 0.37;
+            double fiftypercent = craftingtime /1000  * 0.50;
+            double sixtytwopercent = craftingtime /1000  * 0.625;
+            double seventyfivepercent = craftingtime /1000  * 0.75;
+            double eightysevenpercent = craftingtime /1000  * 0.8725;
+            double onehundredpercent = craftingtime /1000  * 0.96;
+
+            int finalCraftingcost = craftingcost;
+            new CountDownTimer(craftingtime, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    task4time.setText(String.valueOf(millisUntilFinished/1000));
+                    System.out.println(millisUntilFinished);
+                    System.out.println(twelvepercent);
+                    task4bar.setImageResource(R.drawable.zerobar);
+                    System.out.println(millisUntilFinished / 1000);
+                    if(millisUntilFinished/1000 < twelvepercent){
+                        System.out.println("12% loop");
+                        task4bar.setImageResource(R.drawable.sevenbar);
+                    }else if(millisUntilFinished/1000 < twentyfivepercent){
+                        System.out.println("25% loop");
+                        task4bar.setImageResource(R.drawable.sixbar);
+                    }else if(millisUntilFinished/1000 < thirtysevenpercent){
+                        System.out.println("37% loop");
+                        task4bar.setImageResource(R.drawable.fivebar);
+                    }else if(millisUntilFinished/1000 < fiftypercent){
+                        System.out.println("50% loop");
+                        task4bar.setImageResource(R.drawable.fourbar);
+                    }else if(millisUntilFinished/1000 < sixtytwopercent){
+                        System.out.println("62% loop");
+                        task4bar.setImageResource(R.drawable.threebar);
+                    }else if(millisUntilFinished/1000 < seventyfivepercent){
+                        System.out.println("75% loop");
+                        task4bar.setImageResource(R.drawable.twobar);
+                    }else if(millisUntilFinished/1000 < eightysevenpercent){
+                        System.out.println("87% loop");
+                        task4bar.setImageResource(R.drawable.onebar);
+                    }else if(millisUntilFinished/1000 < onehundredpercent){
+                        System.out.println("100% loop");
+                        task4bar.setImageResource(R.drawable.zerobar);
+                    }
+                }
+                public void onFinish() {
+                    Refinery.CraftLumber(totalToCraft);
+                    Inventory.Fish_Quantity = Inventory.Fish_Quantity - finalCraftingcost;
+                    task4bar.setImageResource(R.drawable.completebar);
+                    iscraftingfillets = false;
+                    task4time.setText("Complete!");
+                }
+            }.start();
+        }
+        else {
+            System.out.println("Already Crafting Fillets!");
+            return;
+
+        }
+    }
+    public void BreadTask(View view){
+        int craftingcost = 0;
+        int craftingtime = 0;
+        int totalToCraft = Integer.parseInt(BreadQuantityText.getText().toString());
+
+        if (totalToCraft == 0){
+
+            return;
+        }
+
+        craftingcost = totalToCraft * 8;
+
+        if(Inventory.Wheat_Quantity > craftingcost && iscraftingbreads == false){
+
+            iscraftingbreads = true;
+
+            craftingtime = totalToCraft * 3000;
+
+            double twelvepercent = craftingtime /1000 * 0.125;
+            double twentyfivepercent = craftingtime /1000 * 0.25;
+            double thirtysevenpercent = craftingtime /1000  * 0.37;
+            double fiftypercent = craftingtime /1000  * 0.50;
+            double sixtytwopercent = craftingtime /1000  * 0.625;
+            double seventyfivepercent = craftingtime /1000  * 0.75;
+            double eightysevenpercent = craftingtime /1000  * 0.8725;
+            double onehundredpercent = craftingtime /1000  * 0.96;
+
+            int finalCraftingcost = craftingcost;
+            new CountDownTimer(craftingtime, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    task3time.setText(String.valueOf(millisUntilFinished/1000));
+                    System.out.println(millisUntilFinished);
+                    System.out.println(twelvepercent);
+                    task3bar.setImageResource(R.drawable.zerobar);
+                    System.out.println(millisUntilFinished / 1000);
+                    if(millisUntilFinished/1000 < twelvepercent){
+                        System.out.println("12% loop");
+                        task3bar.setImageResource(R.drawable.sevenbar);
+                    }else if(millisUntilFinished/1000 < twentyfivepercent){
+                        System.out.println("25% loop");
+                        task3bar.setImageResource(R.drawable.sixbar);
+                    }else if(millisUntilFinished/1000 < thirtysevenpercent){
+                        System.out.println("37% loop");
+                        task3bar.setImageResource(R.drawable.fivebar);
+                    }else if(millisUntilFinished/1000 < fiftypercent){
+                        System.out.println("50% loop");
+                        task3bar.setImageResource(R.drawable.fourbar);
+                    }else if(millisUntilFinished/1000 < sixtytwopercent){
+                        System.out.println("62% loop");
+                        task3bar.setImageResource(R.drawable.threebar);
+                    }else if(millisUntilFinished/1000 < seventyfivepercent){
+                        System.out.println("75% loop");
+                        task3bar.setImageResource(R.drawable.twobar);
+                    }else if(millisUntilFinished/1000 < eightysevenpercent){
+                        System.out.println("87% loop");
+                        task3bar.setImageResource(R.drawable.onebar);
+                    }else if(millisUntilFinished/1000 < onehundredpercent){
+                        System.out.println("100% loop");
+                        task3bar.setImageResource(R.drawable.zerobar);
+                    }
+                }
+                public void onFinish() {
+                    Refinery.CraftBread(totalToCraft);
+                    Inventory.Wheat_Quantity = Inventory.Wheat_Quantity - finalCraftingcost;
+                    task3bar.setImageResource(R.drawable.completebar);
+                    iscraftingbreads = false;
+                    task3time.setText("Complete!");
+                }
+            }.start();
+        }
+        else {
+            System.out.println("Already Crafting Bread!");
+            return;
+
+        }
+    }
 }

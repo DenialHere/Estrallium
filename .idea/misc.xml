@@ -4,10 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/chris/AndroidStudioProjects/Estrallium/app/src/main/res/layout/activity_main.xml" value="0.3625" />
+        <entry key="..\:/Users/chris/AndroidStudioProjects/Estrallium/app/src/main/res/layout/buildings.xml" value="0.15718157181571815" />
         <entry key="..\:/Users/chris/AndroidStudioProjects/Estrallium/app/src/main/res/layout/fragment_ad.xml" value="0.2957427536231884" />
         <entry key="..\:/Users/chris/AndroidStudioProjects/Estrallium/app/src/main/res/layout/fragment_plot.xml" value="0.2957427536231884" />
         <entry key="..\:/Users/chris/AndroidStudioProjects/Estrallium/app/src/main/res/layout/fragment_ui.xml" value="0.2957427536231884" />
-        <entry key="..\:/Users/chris/AndroidStudioProjects/Estrallium/app/src/main/res/layout/refinery.xml" value="0.2965811965811966" />
+        <entry key="..\:/Users/chris/AndroidStudioProjects/Estrallium/app/src/main/res/layout/kingdom.xml" value="0.12172538392050587" />
+        <entry key="..\:/Users/chris/AndroidStudioProjects/Estrallium/app/src/main/res/layout/refinery.xml" value="0.33" />
         <entry key="..\:/Users/chris/AndroidStudioProjects/Estrallium/app/src/main/res/layout/store.xml" value="0.3625" />
         <entry key="..\:/Users/dania/AndroidStudioProjects/Estrallium/app/src/main/res/layout/Dialog.xml" value="0.3140625" />
         <entry key="..\:/Users/dania/AndroidStudioProjects/Estrallium/app/src/main/res/layout/activity_main.xml" value="0.30393145161290325" />

@@ -4,178 +4,493 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:layout_editor_absoluteX="2dp"
-    tools:layout_editor_absoluteY="-269dp">
+    tools:layout_editor_absoluteX="369dp"
+    tools:layout_editor_absoluteY="87dp"
+    tools:context=".Activities.RefineryActivity">
 
-    <CheckBox
-        android:id="@+id/filletbox"
-        android:layout_width="96dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="46dp"
-        android:text="Fillet"
-        app:layout_constraintBottom_toTopOf="@+id/quantityboxrefinery"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <CheckBox
-        android:id="@+id/oilbox"
-        android:layout_width="92dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="46dp"
-        android:text="Oil"
-        app:layout_constraintBottom_toTopOf="@+id/quantityboxrefinery"
-        app:layout_constraintEnd_toStartOf="@+id/bonesbox"
-        app:layout_constraintStart_toEndOf="@+id/filletbox" />
-
-    <CheckBox
-        android:id="@+id/bonesbox"
-        android:layout_width="92dp"
-        android:layout_height="52dp"
-        android:layout_marginEnd="46dp"
-        android:layout_marginBottom="46dp"
-        android:text="Bones"
-        app:layout_constraintBottom_toTopOf="@+id/quantityboxrefinery"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/refinebutton"
-        android:layout_width="135dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="139dp"
-        android:layout_marginEnd="138dp"
-        android:layout_marginBottom="60dp"
-        android:background="@drawable/woodcutting_plot_default_button"
-        android:foreground="@drawable/woodcutting_plot_default_button"
-        android:onClick="Refine"
-        android:text="CRAFT"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/templateimage2"
+        android:layout_width="match_parent"
+        android:layout_height="372dp"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <CheckBox
-        android:id="@+id/brickbox"
-        android:layout_width="91dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="20dp"
-        android:text="Bricks"
-        app:layout_constraintBottom_toTopOf="@+id/lumberbox"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <CheckBox
-        android:id="@+id/gravelbox"
-        android:layout_width="87dp"
-        android:layout_height="56dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="28dp"
-        android:layout_marginBottom="20dp"
-        android:text="Gravel"
-        app:layout_constraintBottom_toTopOf="@+id/plankbox"
-        app:layout_constraintEnd_toStartOf="@+id/mortarbox"
-        app:layout_constraintStart_toEndOf="@+id/brickbox" />
-
-    <CheckBox
-        android:id="@+id/mortarbox"
-        android:layout_width="88dp"
-        android:layout_height="58dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginBottom="24dp"
-        android:text="Mortar"
-        app:layout_constraintBottom_toTopOf="@+id/sawdustbox"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <CheckBox
-        android:id="@+id/sawdustbox"
-        android:layout_width="95dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="43dp"
-        android:layout_marginBottom="27dp"
-        android:text="Sawdust"
-        app:layout_constraintBottom_toTopOf="@+id/sandwichbox"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <CheckBox
-        android:id="@+id/breadbox"
-        android:layout_width="94dp"
-        android:layout_height="52dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="28dp"
-        android:text="Bread"
-        app:layout_constraintBottom_toTopOf="@+id/filletbox"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <CheckBox
-        android:id="@+id/stewbox"
-        android:layout_width="89dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginEnd="26dp"
-        android:layout_marginBottom="27dp"
-        android:text="Stew"
-        app:layout_constraintBottom_toTopOf="@+id/oilbox"
-        app:layout_constraintEnd_toStartOf="@+id/sandwichbox"
-        app:layout_constraintStart_toEndOf="@+id/breadbox" />
-
-    <CheckBox
-        android:id="@+id/sandwichbox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="45dp"
-        android:layout_marginBottom="27dp"
-        android:text="Sandwich"
-        app:layout_constraintBottom_toTopOf="@+id/bonesbox"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <CheckBox
-        android:id="@+id/lumberbox"
-        android:layout_width="94dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="25dp"
-        android:layout_marginBottom="21dp"
-        android:text="Lumber"
-        app:layout_constraintBottom_toTopOf="@+id/breadbox"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <CheckBox
-        android:id="@+id/plankbox"
-        android:layout_width="93dp"
-        android:layout_height="51dp"
-        android:layout_marginStart="21dp"
-        android:layout_marginEnd="22dp"
-        android:layout_marginBottom="21dp"
-        android:text="Planks"
-        app:layout_constraintBottom_toTopOf="@+id/stewbox"
-        app:layout_constraintEnd_toStartOf="@+id/sawdustbox"
-        app:layout_constraintStart_toEndOf="@+id/lumberbox" />
-
-    <EditText
-        android:id="@+id/quantityboxrefinery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="91dp"
-        android:layout_marginEnd="91dp"
-        android:layout_marginBottom="45dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintBottom_toTopOf="@+id/previewbox"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/templateimage"
+        app:srcCompat="@drawable/template2" />
 
     <TextView
-        android:id="@+id/previewbox"
-        android:layout_width="146dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="120dp"
-        android:layout_marginEnd="138dp"
-        android:layout_marginBottom="16dp"
-        android:text="Estimated time to make "
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/refinebutton"
+        android:id="@+id/textView58"
+        android:layout_width="54dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:text="Zero!"
+        android:textSize="12dp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button20" />
+
+    <Button
+        android:id="@+id/button18"
+        android:onClick="FilletTask"
+        android:layout_width="75dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/fishingbutton"
+        android:foreground="@drawable/fishingbutton"
+        android:text="Button"
+        app:layout_constraintStart_toEndOf="@+id/button17"
+        app:layout_constraintTop_toBottomOf="@+id/textView64" />
+
+    <Button
+        android:id="@+id/button19"
+        android:onClick="BrickTask"
+        android:layout_width="79dp"
+        android:layout_height="44dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/woodcutting_plot_default_button"
+        android:foreground="@drawable/miningbutton"
+        android:text="Button"
+        app:layout_constraintEnd_toStartOf="@+id/button20"
+        app:layout_constraintTop_toBottomOf="@+id/textView65" />
+
+    <Button
+        android:id="@+id/button20"
+        android:onClick="BreadTask"
+        android:layout_width="74dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/woodcutting_plot_default_button"
+        android:foreground="@drawable/woodcutting_plot_default_button"
+        android:text="Button"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView66" />
+
+    <ImageView
+        android:id="@+id/imageView75"
+        android:layout_width="16dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView58"
+        app:layout_constraintTop_toBottomOf="@+id/button20"
+        app:srcCompat="@drawable/wheat" />
+
+    <ImageView
+        android:id="@+id/imageView74"
+        android:layout_width="15dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView57"
+        app:layout_constraintTop_toBottomOf="@+id/button19"
+        app:srcCompat="@drawable/stones" />
+
+    <ImageView
+        android:id="@+id/imageView73"
+        android:layout_width="13dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toStartOf="@+id/textView55"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button17"
+        app:srcCompat="@drawable/logs" />
+
+    <TextView
+        android:id="@+id/textView52"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="36dp"
+        android:text="Fillet"
+        android:textAlignment="center"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="@+id/templateimage2"
+        app:layout_constraintTop_toBottomOf="@+id/templateimage" />
+
+    <TextView
+        android:id="@+id/textView53"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="36dp"
+        android:text="Brick"
+        android:textAlignment="center"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="@+id/templateimage2"
+        app:layout_constraintTop_toBottomOf="@+id/templateimage" />
+
+    <TextView
+        android:id="@+id/textView54"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="314dp"
+        android:layout_marginTop="36dp"
+        android:text="Bread"
+        android:textAlignment="center"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="@+id/templateimage2"
+        app:layout_constraintTop_toBottomOf="@+id/templateimage" />
+
+    <ImageView
+        android:id="@+id/templateimage"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/template" />
+
+    <ImageView
+        android:id="@+id/task4bar"
+        android:layout_width="189dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="7dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/taskimage4"
+        app:layout_constraintTop_toBottomOf="@+id/task3bar"
+        app:srcCompat="@drawable/emptybar" />
+
+    <ImageView
+        android:id="@+id/task1bar"
+        android:layout_width="189dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="36dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/taskimage1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/emptybar" />
+
+    <ImageView
+        android:id="@+id/task2bar"
+        android:layout_width="189dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="2dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/taskimage2"
+        app:layout_constraintTop_toBottomOf="@+id/task1bar"
+        app:srcCompat="@drawable/emptybar" />
+
+    <ImageView
+        android:id="@+id/task3bar"
+        android:layout_width="189dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="7dp"
+        android:scaleType="fitXY"
+        app:layout_constraintStart_toEndOf="@+id/taskimage3"
+        app:layout_constraintTop_toBottomOf="@+id/task2bar"
+        app:srcCompat="@drawable/emptybar" />
+
+    <ImageView
+        android:id="@+id/taskimage4"
+        android:layout_width="34dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskimage3"
+        app:srcCompat="@drawable/fillet" />
+
+    <ImageView
+        android:id="@+id/taskimage3"
+        android:layout_width="34dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskimage2"
+        app:srcCompat="@drawable/bread" />
+
+    <ImageView
+        android:id="@+id/taskimage1"
+        android:layout_width="34dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/lumber" />
+
+    <ImageView
+        android:id="@+id/taskimage2"
+        android:layout_width="34dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="7dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/taskimage1"
+        app:srcCompat="@drawable/bricks" />
+
+    <TextView
+        android:id="@+id/titlebar"
+        android:layout_width="106dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="2dp"
+        android:text="Time Remaining"
+        android:textAlignment="textStart"
+        android:textSize="12dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView51"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="36dp"
+        android:text="Lumber"
+        android:textAlignment="center"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="@+id/templateimage2"
+        app:layout_constraintTop_toBottomOf="@+id/templateimage" />
+
+    <ImageView
+        android:id="@+id/imageView72"
+        android:layout_width="16dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="107dp"
+        android:layout_marginTop="9dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button18"
+        app:srcCompat="@drawable/fish" />
+
+    <Button
+        android:id="@+id/button17"
+        android:onClick="LumberTask"
+        android:layout_width="76dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/woodcutting_plot_default_button"
+        android:foreground="@drawable/woodcutting_plot_default_button"
+        android:text="Button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView63" />
+
+    <EditText
+        android:id="@+id/LumberQuantityText"
+        android:layout_width="72dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="10sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView51" />
+
+    <EditText
+        android:id="@+id/FilletQuantityText"
+        android:layout_width="72dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="10sp"
+        app:layout_constraintStart_toEndOf="@+id/LumberQuantityText"
+        app:layout_constraintTop_toBottomOf="@+id/textView52" />
+
+    <EditText
+        android:id="@+id/BrickQuantityText"
+        android:layout_width="75dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/BreadQuantityText"
+        app:layout_constraintTop_toBottomOf="@+id/textView53" />
+
+    <EditText
+        android:id="@+id/BreadQuantityText"
+        android:layout_width="74dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="20dp"
+        android:ems="10"
+        android:inputType="number"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView54" />
+
+    <TextView
+        android:id="@+id/textView55"
+        android:layout_width="56dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="Zero!"
+        android:textSize="12dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toStartOf="@+id/imageView72"
+        app:layout_constraintTop_toBottomOf="@+id/button17" />
+
+    <TextView
+        android:id="@+id/textView56"
+        android:layout_width="56dp"
+        android:layout_height="23dp"
+        android:layout_marginTop="9dp"
+        android:text="Zero!"
+        android:textSize="12dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/imageView72"
+        app:layout_constraintTop_toBottomOf="@+id/button18" />
+
+    <TextView
+        android:id="@+id/textView57"
+        android:layout_width="52dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="12dp"
+        android:text="Zero!"
+        android:textSize="12dp"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toStartOf="@+id/imageView75"
+        app:layout_constraintTop_toBottomOf="@+id/button19" />
+
+    <TextView
+        android:id="@+id/textView59"
+        android:layout_width="69dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:text="00:00"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView73" />
+
+    <TextView
+        android:id="@+id/textView60"
+        android:layout_width="72dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="14dp"
+        android:text="00:00"
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/textView59"
+        app:layout_constraintTop_toBottomOf="@+id/textView56" />
+
+    <TextView
+        android:id="@+id/textView61"
+        android:layout_width="72dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:text="00:00"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toStartOf="@+id/textView62"
+        app:layout_constraintTop_toBottomOf="@+id/imageView74" />
+
+    <TextView
+        android:id="@+id/textView62"
+        android:layout_width="73dp"
+        android:layout_height="17dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="00:00"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView75" />
+
+    <TextView
+        android:id="@+id/textView63"
+        android:layout_width="72dp"
+        android:layout_height="116dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="4dp"
+        android:text="Logs can be turned into lumber at a rate of 1 to 35! Each takes 5 minutes."
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/LumberQuantityText" />
+
+    <TextView
+        android:id="@+id/textView64"
+        android:layout_width="73dp"
+        android:layout_height="116dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="4dp"
+        android:text="Fish can be turned into Fillets at a rate of 1 to 8! Each takes 30 seconds."
+        android:textStyle="bold|italic"
+        app:layout_constraintStart_toEndOf="@+id/textView63"
+        app:layout_constraintTop_toBottomOf="@+id/FilletQuantityText" />
+
+    <TextView
+        android:id="@+id/textView65"
+        android:layout_width="76dp"
+        android:layout_height="116dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="11dp"
+        android:text="Stone can be turned into Brick at a rate of 1 to 160! Each takes 16 minutes."
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toStartOf="@+id/textView66"
+        app:layout_constraintTop_toBottomOf="@+id/BrickQuantityText" />
+
+    <TextView
+        android:id="@+id/textView66"
+        android:layout_width="74dp"
+        android:layout_height="115dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="20dp"
+        android:text="Wheat can be turned into Bread at rate of 1 to 3! Each takes 1 minute."
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BreadQuantityText" />
+
+    <TextView
+        android:id="@+id/task1time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="36dp"
+        android:text="00:00:00"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titlebar" />
+
+    <TextView
+        android:id="@+id/task2time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="36dp"
+        android:text="00:00:00"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task1time" />
+
+    <TextView
+        android:id="@+id/task3time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="36dp"
+        android:text="00:00:00"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task2time" />
+
+    <TextView
+        android:id="@+id/task4time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="36dp"
+        android:text="00:00:00"
+        android:textStyle="bold|italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task3time" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

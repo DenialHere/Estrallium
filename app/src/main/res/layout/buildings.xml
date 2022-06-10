@@ -28,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="238dp"
             android:scaleType="fitXY"
-            app:srcCompat="@drawable/forestbackground" />
+            app:srcCompat="@drawable/forest_background" />
 
         <ImageView
             android:onClick="goToMiningActivity"

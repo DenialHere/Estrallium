@@ -335,7 +335,7 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 Player.CurrentPlot = Inventory.WOOD;
                 specialItemImg.setImageResource(R.drawable.magicseed);
-                plotImg.setImageResource(R.drawable.forestbackground);
+                plotImg.setImageResource(R.drawable.forest_background);
                 skillImg.setImageResource(R.drawable.woodcutting);
                 resourceImg.setImageResource(R.drawable.logs);
                 resourceTxt.setText(Integer.toString(Inventory.Log_Quantity));
