@@ -14,17 +14,19 @@
         android:layout_height="372dp"
         android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/templateimage"
         app:srcCompat="@drawable/template2" />
 
     <TextView
-        android:id="@+id/textView58"
+        android:id="@+id/estimatedcost4"
         android:layout_width="54dp"
         android:layout_height="21dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
         android:text="Zero!"
+        android:textAlignment="center"
         android:textSize="12dp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
@@ -76,7 +78,7 @@
         android:layout_height="23dp"
         android:layout_marginTop="6dp"
         android:layout_marginEnd="2dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView58"
+        app:layout_constraintEnd_toStartOf="@+id/estimatedcost4"
         app:layout_constraintTop_toBottomOf="@+id/button20"
         app:srcCompat="@drawable/wheat" />
 
@@ -86,7 +88,7 @@
         android:layout_height="21dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView57"
+        app:layout_constraintEnd_toStartOf="@+id/estimatedcost3"
         app:layout_constraintTop_toBottomOf="@+id/button19"
         app:srcCompat="@drawable/stones" />
 
@@ -95,7 +97,7 @@
         android:layout_width="13dp"
         android:layout_height="22dp"
         android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView55"
+        app:layout_constraintEnd_toStartOf="@+id/estimatedcost1"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button17"
@@ -286,6 +288,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="number"
+        android:text="0"
         android:textSize="10sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView51" />
@@ -298,6 +301,7 @@
         android:layout_marginTop="12dp"
         android:ems="10"
         android:inputType="number"
+        android:text="0"
         android:textSize="10sp"
         app:layout_constraintStart_toEndOf="@+id/LumberQuantityText"
         app:layout_constraintTop_toBottomOf="@+id/textView52" />
@@ -310,7 +314,8 @@
         android:layout_marginEnd="12dp"
         android:ems="10"
         android:inputType="number"
-        android:textSize="10sp"
+        android:text="0"
+        android:textSize="9sp"
         app:layout_constraintEnd_toStartOf="@+id/BreadQuantityText"
         app:layout_constraintTop_toBottomOf="@+id/textView53" />
 
@@ -322,47 +327,51 @@
         android:layout_marginEnd="20dp"
         android:ems="10"
         android:inputType="number"
+        android:text="0"
         android:textSize="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView54" />
 
     <TextView
-        android:id="@+id/textView55"
+        android:id="@+id/estimatedcost1"
         android:layout_width="56dp"
         android:layout_height="22dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:text="Zero!"
+        android:textAlignment="center"
         android:textSize="12dp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toStartOf="@+id/imageView72"
         app:layout_constraintTop_toBottomOf="@+id/button17" />
 
     <TextView
-        android:id="@+id/textView56"
+        android:id="@+id/estimatedcost2"
         android:layout_width="56dp"
         android:layout_height="23dp"
         android:layout_marginTop="9dp"
         android:text="Zero!"
+        android:textAlignment="center"
         android:textSize="12dp"
         android:textStyle="bold|italic"
         app:layout_constraintStart_toEndOf="@+id/imageView72"
         app:layout_constraintTop_toBottomOf="@+id/button18" />
 
     <TextView
-        android:id="@+id/textView57"
+        android:id="@+id/estimatedcost3"
         android:layout_width="52dp"
         android:layout_height="21dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="12dp"
         android:text="Zero!"
+        android:textAlignment="textStart"
         android:textSize="12dp"
         android:textStyle="bold|italic"
         app:layout_constraintEnd_toStartOf="@+id/imageView75"
         app:layout_constraintTop_toBottomOf="@+id/button19" />
 
     <TextView
-        android:id="@+id/textView59"
+        android:id="@+id/estimatedtime1"
         android:layout_width="69dp"
         android:layout_height="22dp"
         android:layout_marginStart="20dp"
@@ -373,29 +382,29 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView73" />
 
     <TextView
-        android:id="@+id/textView60"
+        android:id="@+id/estimatedtime2"
         android:layout_width="72dp"
         android:layout_height="22dp"
         android:layout_marginStart="18dp"
         android:layout_marginTop="14dp"
         android:text="00:00"
         android:textStyle="bold|italic"
-        app:layout_constraintStart_toEndOf="@+id/textView59"
-        app:layout_constraintTop_toBottomOf="@+id/textView56" />
+        app:layout_constraintStart_toEndOf="@+id/estimatedtime1"
+        app:layout_constraintTop_toBottomOf="@+id/estimatedcost2" />
 
     <TextView
-        android:id="@+id/textView61"
+        android:id="@+id/estimatedtime3"
         android:layout_width="72dp"
         android:layout_height="22dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="12dp"
         android:text="00:00"
         android:textStyle="bold|italic"
-        app:layout_constraintEnd_toStartOf="@+id/textView62"
+        app:layout_constraintEnd_toStartOf="@+id/estimatedtime4"
         app:layout_constraintTop_toBottomOf="@+id/imageView74" />
 
     <TextView
-        android:id="@+id/textView62"
+        android:id="@+id/estimatedtime4"
         android:layout_width="73dp"
         android:layout_height="17dp"
         android:layout_marginTop="16dp"

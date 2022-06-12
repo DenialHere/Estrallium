@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.test_activity.Inventory.Inventory;
@@ -18,12 +19,15 @@ import com.example.test_activity.R;
 public class RefineryActivity extends AppCompatActivity {
 
    TextView LumberQuantityText, BreadQuantityText, FilletQuantityText, BrickQuantityText, task1time, task2time, task3time, task4time;
+   TextView estimate1, estimate2, estimate3, estimate4, time1,time2,time3,time4;
    ImageView task1bar, task2bar, task3bar, task4bar;
+   protected static int lumbertime, bricktime, fishtime, breadtime;
 
     static boolean iscraftinglumber = false;
     static boolean iscraftingbricks = false;
     static boolean iscraftingfillets = false;
     static boolean iscraftingbreads = false;
+
 
 
     @Override
@@ -35,6 +39,7 @@ public class RefineryActivity extends AppCompatActivity {
         task3time = findViewById(R.id.task3time);
         task4time = findViewById(R.id.task4time);
         LumberQuantityText = findViewById(R.id.LumberQuantityText);
+        LumberQuantityText.setText("0");
         BreadQuantityText = findViewById(R.id.BreadQuantityText);
         FilletQuantityText = findViewById(R.id.FilletQuantityText);
         BrickQuantityText = findViewById(R.id.BrickQuantityText);
@@ -42,6 +47,40 @@ public class RefineryActivity extends AppCompatActivity {
         task2bar = findViewById(R.id.task2bar);
         task3bar = findViewById(R.id.task3bar);
         task4bar = findViewById(R.id.task4bar);
+
+        estimate1 = findViewById(R.id.estimatedcost1);
+        estimate2 = findViewById(R.id.estimatedcost2);
+        estimate3 = findViewById(R.id.estimatedcost3);
+        estimate4 = findViewById(R.id.estimatedcost4);
+
+        time1 = findViewById(R.id.estimatedtime1);
+        time2 = findViewById(R.id.estimatedtime2);
+        time3 = findViewById(R.id.estimatedtime3);
+        time4 = findViewById(R.id.estimatedtime4);
+
+        new CountDownTimer(1999999990, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                try {
+                    time1.setText(String.valueOf(Integer.parseInt(LumberQuantityText.getText().toString()) * 300));
+
+                    time2.setText(String.valueOf(Integer.parseInt(FilletQuantityText.getText().toString()) * 30));
+                    time3.setText(String.valueOf(Integer.parseInt(BrickQuantityText.getText().toString()) * 960));
+                    time4.setText(String.valueOf(Integer.parseInt(BreadQuantityText.getText().toString()) * 60));
+
+
+                    estimate1.setText(String.valueOf(Integer.parseInt(LumberQuantityText.getText().toString()) * 35));
+                    estimate2.setText(String.valueOf(Integer.parseInt(FilletQuantityText.getText().toString()) * 8));
+                    estimate3.setText(String.valueOf(Integer.parseInt(BrickQuantityText.getText().toString()) * 160));
+                    estimate4.setText(String.valueOf(Integer.parseInt(BreadQuantityText.getText().toString()) * 3));
+                } catch(NumberFormatException nfe) {
+                    System.out.println("Could not parse " + nfe);
+                }
+            }
+            public void onFinish() {
+
+            }
+        }.start();
 
     }
 
@@ -53,6 +92,7 @@ public class RefineryActivity extends AppCompatActivity {
 
         if (totalToCraft == 0){
 
+            System.out.println("error");
             return;
         }
 
@@ -62,7 +102,7 @@ public class RefineryActivity extends AppCompatActivity {
 
             iscraftinglumber = true;
 
-            craftingtime = totalToCraft * 3000;
+            craftingtime = totalToCraft * 300000;
             //new merge
             double twelvepercent = craftingtime /1000 * 0.125;
             double twentyfivepercent = craftingtime /1000 * 0.25;
@@ -118,7 +158,7 @@ public class RefineryActivity extends AppCompatActivity {
             }.start();
         }
         else {
-            System.out.println("Already Crafting Lumber!");
+            System.out.println("Already Crafting Lumber! or not enough!");
             return;
 
         }
@@ -131,6 +171,7 @@ public class RefineryActivity extends AppCompatActivity {
 
         if (totalToCraft == 0){
 
+            System.out.println("error");
             return;
         }
 
@@ -140,7 +181,7 @@ public class RefineryActivity extends AppCompatActivity {
 
             iscraftingbricks = true;
 
-            craftingtime = totalToCraft * 3000;
+            craftingtime = totalToCraft * 960000;
 
             double twelvepercent = craftingtime /1000 * 0.125;
             double twentyfivepercent = craftingtime /1000 * 0.25;
@@ -196,7 +237,7 @@ public class RefineryActivity extends AppCompatActivity {
             }.start();
         }
         else {
-            System.out.println("Already Crafting Bricks!");
+            System.out.println("Already Crafting Bricks! or not enough!");
             return;
 
         }
@@ -206,9 +247,9 @@ public class RefineryActivity extends AppCompatActivity {
         int craftingcost = 0;
         int craftingtime = 0;
         int totalToCraft = Integer.parseInt(FilletQuantityText.getText().toString());
-
         if (totalToCraft == 0){
 
+            System.out.println("error");
             return;
         }
 
@@ -218,7 +259,7 @@ public class RefineryActivity extends AppCompatActivity {
 
             iscraftingfillets = true;
 
-            craftingtime = totalToCraft * 3000;
+            craftingtime = totalToCraft * 30000;
 
             double twelvepercent = craftingtime /1000 * 0.125;
             double twentyfivepercent = craftingtime /1000 * 0.25;
@@ -274,7 +315,7 @@ public class RefineryActivity extends AppCompatActivity {
             }.start();
         }
         else {
-            System.out.println("Already Crafting Fillets!");
+            System.out.println("Already Crafting Fillets! or not enough!");
             return;
 
         }
@@ -286,6 +327,7 @@ public class RefineryActivity extends AppCompatActivity {
 
         if (totalToCraft == 0){
 
+            System.out.println("error");
             return;
         }
 
@@ -295,7 +337,7 @@ public class RefineryActivity extends AppCompatActivity {
 
             iscraftingbreads = true;
 
-            craftingtime = totalToCraft * 3000;
+            craftingtime = totalToCraft * 60000;
 
             double twelvepercent = craftingtime /1000 * 0.125;
             double twentyfivepercent = craftingtime /1000 * 0.25;
@@ -351,7 +393,7 @@ public class RefineryActivity extends AppCompatActivity {
             }.start();
         }
         else {
-            System.out.println("Already Crafting Bread!");
+            System.out.println("Already Crafting Bread! or not enough!");
             return;
 
         }
