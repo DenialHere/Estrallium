@@ -193,6 +193,7 @@ public class Tasks {
                         DemandRequired[0][0] = resource;
                         DemandRequired[1][0] = quantity;
                     }
+
                     break;
                 case Inventory.STONE:
                     resourceName = "Stone";
@@ -224,9 +225,10 @@ public class Tasks {
                         DemandRequired[1][0] = quantity;
                     }
                     break;
+
             }
 
-
+            System.out.println(Demand);
     }
 
 

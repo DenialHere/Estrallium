@@ -133,9 +133,8 @@ public class Workers {
             case 4:
                 if (Player.Level >= 15) {
                     calculated = (1 + Rare.getGiant_Wheat_Seeds()) * Farm_Workers;
-                    //Inventory.Log_Quantity = Inventory.Log_Quantity + Rare.Magic_Seeds * Forest_Workers;
-                    Inventory.Wheat_Quantity = Inventory.getFish_Quantity() + calculated;
-                    System.out.println(Inventory.getFish_Quantity());
+                    Inventory.Wheat_Quantity = Inventory.Wheat_Quantity + calculated;
+                    System.out.println(Inventory.Wheat_Quantity);
                     System.out.println("Worker adding Wheat Resource...");
                 }
                 break;

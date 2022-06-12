@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SoundPlayer music = new SoundPlayer();
+        music.PlayMusic(this, R.raw.bgm, Player.MusicIsMuted);
+
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
             @Override
@@ -143,7 +146,6 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             public void run() {
                 Workers.AddResource_Worker(Inventory.WOOD);
-                System.out.println(Integer.toString(Workers.MineWorkerSpeed));
                 handler.postDelayed(this, Workers.MineWorkerSpeed);
             }
         }, Workers.MineWorkerSpeed);
@@ -152,10 +154,27 @@ public class MainActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             public void run() {
                 Workers.AddResource_Worker(Inventory.STONE);
-                System.out.println(Integer.toString(Workers.ForestWorkerSpeed));
                 handler.postDelayed(this, Workers.ForestWorkerSpeed);
             }
         }, Workers.ForestWorkerSpeed);
+
+
+        //FISH workers
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                Workers.AddResource_Worker(Inventory.FISH);
+                handler.postDelayed(this, Workers.FishingBoatWorkerSpeed);
+            }
+        }, Workers.FishingBoatWorkerSpeed);
+
+        //WHEAT workers
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                Workers.AddResource_Worker(Inventory.WHEAT);
+                System.out.println(Integer.toString(Workers.Farm_Workers));
+                handler.postDelayed(this, Workers.FarmWorkerSpeed);
+            }
+        }, Workers.FarmWorkerSpeed);
 
         //Updating resources every second
         handler.postDelayed(new Runnable() {
@@ -182,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (chance == 1){
                         Tasks.GenerateDemand();
-                        if (Tasks.Demand != ""){
+                        if (Tasks.Demand != "" || Tasks.Demand.isEmpty()){
                             Intent intent = new Intent(activity, DemandActivity.class);
                             startActivity(intent);
                         }
@@ -205,45 +224,48 @@ public class MainActivity extends AppCompatActivity {
         if (Tutorial.Done == true && plotCursor.getVisibility() != View.GONE){
             plotCursor.setVisibility(View.GONE);
         }
-        if (Inventory.Log_Quantity >= 50 && Tutorial.ClickPlotDone == false && Player.Level >= 2){
-            plotCursor.setVisibility(View.GONE);
-            Tutorial.ClickPlotDone = true;
-            Tutorial.Message = "You have enough resources to upgrade your kingdom! \n Click on the kingdom button to upgrade.";
-            Intent intent = new Intent(this, TutorialActivity.class);
-            startActivity(intent);
-        }
-        if (Tutorial.ClickPlotDone == true && Tutorial.KingdomDone == false){
-            kingdomCursor.setVisibility(View.VISIBLE);
-        }
-        if (Kingdom.Level >= 2 && Tutorial.KingdomDone == false){
-            kingdomCursor.setVisibility(View.GONE);
-            Tutorial.KingdomDone = true;
-        }
-        if (Kingdom.Level >= 3 && Tutorial.StoreDone == false){
-            Tutorial.Message = "You got some gold finally! \n Why don't you try buying something from the shop?";
-            Intent intent = new Intent(this, TutorialActivity.class);
-            startActivity(intent);
-            storeCursor.setVisibility(View.VISIBLE);
-            Tutorial.StoreDone = true;
-        }
-        if (Tutorial.StoreClicked == true){
-            storeCursor.setVisibility(View.GONE);
-        }
-        if (Player.Level >= Constants.miningLevelRequiredForPlot && Tutorial.SwipeDone1 == false){
-            Tutorial.Message = "You need more than just wood to create a kingdom! \n Swipe right to switch to the stone plot. \n Swiping left will bring you back.";
-            Intent intent = new Intent(this, TutorialActivity.class);
-            startActivity(intent);
-            swipeCursor.setVisibility(View.VISIBLE);
-            Tutorial.SwipeDone1 = true;
-        }
-        if (Tutorial.SwipeDone1 == true && Player.CurrentPlot == Inventory.STONE && Tutorial.SwipeDone2 == false){
-            swipeCursor.setVisibility(View.GONE);
-            plotCursor.setVisibility(View.VISIBLE);
-            Tutorial.SwipeDone2 = true;
-        }
-        if (Inventory.Stone_Quantity >= 15 && Tutorial.SwipeDone3 == false){
-            plotCursor.setVisibility(View.GONE);
-            Tutorial.SwipeDone3 = true;
+        if (Tutorial.Done == false ) {
+
+            if (Inventory.Log_Quantity >= 50 && Tutorial.ClickPlotDone == false && Player.Level >= 2) {
+                plotCursor.setVisibility(View.GONE);
+                Tutorial.ClickPlotDone = true;
+                Tutorial.Message = "You have enough resources to upgrade your kingdom! \n Click on the kingdom button to upgrade.";
+                Intent intent = new Intent(this, TutorialActivity.class);
+                startActivity(intent);
+            }
+            if (Tutorial.ClickPlotDone == true && Tutorial.KingdomDone == false) {
+                kingdomCursor.setVisibility(View.VISIBLE);
+            }
+            if (Kingdom.Level >= 2 && Tutorial.KingdomDone == false) {
+                kingdomCursor.setVisibility(View.GONE);
+                Tutorial.KingdomDone = true;
+            }
+            if (Kingdom.Level >= 3 && Tutorial.StoreDone == false) {
+                Tutorial.Message = "You got some gold finally! \n Why don't you try buying something from the shop?";
+                Intent intent = new Intent(this, TutorialActivity.class);
+                startActivity(intent);
+                storeCursor.setVisibility(View.VISIBLE);
+                Tutorial.StoreDone = true;
+            }
+            if (Tutorial.StoreClicked == true) {
+                storeCursor.setVisibility(View.GONE);
+            }
+            if (Player.Level >= Constants.miningLevelRequiredForPlot && Tutorial.SwipeDone1 == false) {
+                Tutorial.Message = "You need more than just wood to create a kingdom! \n Swipe right to switch to the stone plot. \n Swiping left will bring you back.";
+                Intent intent = new Intent(this, TutorialActivity.class);
+                startActivity(intent);
+                swipeCursor.setVisibility(View.VISIBLE);
+                Tutorial.SwipeDone1 = true;
+            }
+            if (Tutorial.SwipeDone1 == true && Player.CurrentPlot == Inventory.STONE && Tutorial.SwipeDone2 == false) {
+                swipeCursor.setVisibility(View.GONE);
+                plotCursor.setVisibility(View.VISIBLE);
+                Tutorial.SwipeDone2 = true;
+            }
+            if (Inventory.Stone_Quantity >= 15 && Tutorial.SwipeDone3 == false) {
+                plotCursor.setVisibility(View.GONE);
+                Tutorial.SwipeDone3 = true;
+            }
         }
     }
 
@@ -512,7 +534,7 @@ public class MainActivity extends AppCompatActivity {
         TextView skillTxt = findViewById(R.id.textViewSkill);
         TextView workers = findViewById(R.id.textViewWorkers);
 
-        if (direction == DIRECTION_RIGHT){
+        if (direction == DIRECTION_RIGHT && Player.CurrentPlot != 5){
             Player.CurrentPlot++;
         }
         if (direction == DIRECTION_LEFT && Player.CurrentPlot != 1){
@@ -536,7 +558,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 2:
                 specialItemImg.setImageResource(R.drawable.gem);
-                plotImg.setImageResource(R.drawable.lock);
+                plotImg.setImageResource(R.drawable.unlocked_level5);
                 skillImg.setImageResource(R.drawable.miningicon);
                 resourceImg.setImageResource(R.drawable.stone);
                 resourceTxt.setText(Integer.toString(Inventory.Stone_Quantity));
@@ -552,7 +574,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 3:
                 specialItemImg.setImageResource(R.drawable.rainbow_fish);
-                plotImg.setImageResource(R.drawable.lock);
+                plotImg.setImageResource(R.drawable.unlocked_level10);
                 skillImg.setImageResource(R.drawable.fishingicon);
                 resourceImg.setImageResource(R.drawable.trout);
                 resourceTxt.setText(Integer.toString(Inventory.Fish_Quantity));
@@ -568,7 +590,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case 4:
                 specialItemImg.setImageResource(R.drawable.artifact);
-                plotImg.setImageResource(R.drawable.lock);
+                plotImg.setImageResource(R.drawable.unlocked_level20);
                 skillImg.setImageResource(R.drawable.farmingicon);
                 resourceImg.setImageResource(R.drawable.grain);
                 resourceTxt.setText(Integer.toString(Inventory.Wheat_Quantity));
@@ -579,6 +601,12 @@ public class MainActivity extends AppCompatActivity {
                     plotImg.setImageResource(R.drawable.farmbackground);
                     Player.CurrentPlot = Inventory.WHEAT;
                 }
+                break;
+            case 5:
+                specialItemImg.setImageResource(R.drawable.question);
+                plotImg.setImageResource(R.drawable.more_comming_soon);
+                skillImg.setImageResource(R.drawable.question);
+                resourceImg.setImageResource(R.drawable.question);
                 break;
         }
 

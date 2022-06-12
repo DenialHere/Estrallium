@@ -34,14 +34,7 @@ public class DemandActivity extends AppCompatActivity {
         setContentView(R.layout.demand_dialog);
         demandTextView = findViewById(R.id.textViewDemand);
         demandTextView.setText(Tasks.Demand);
-        //Random event
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-               Refuse();
-                handler.postDelayed(this, Tasks.TaskTimer);
-            }
-        }, Tasks.TaskTimer);
+        Tasks.IsEnabled = false;
     }
 
 
@@ -86,6 +79,7 @@ public class DemandActivity extends AppCompatActivity {
                 DialogueManager.ShowMessage(this, "You don't have the required resources.", R.drawable.villager, Gravity.CENTER);
                 break;
         }
+        Tasks.IsEnabled = true;
         finish();
     }
 
@@ -100,6 +94,7 @@ public class DemandActivity extends AppCompatActivity {
         if (Kingdom.Favour <= 0){
             Kingdom.Favour = Kingdom.Favour - 0.5;
         }
+        Tasks.IsEnabled = true;
         finish();
     }
 }

@@ -68,7 +68,7 @@
         <ImageButton
             android:id="@+id/imageButtonResource"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="280dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_weight="0"
@@ -108,7 +108,7 @@
             <ImageView
                 android:id="@+id/imageViewSkill"
                 android:layout_width="40dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:src="@drawable/woodcutting" />
 
@@ -127,17 +127,9 @@
                 android:layout_weight="1"
                 android:src="@android:drawable/ic_menu_myplaces" />
 
-            <Button
-                android:id="@+id/buttonAddWorkers"
-                android:layout_width="10dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="RemoveWorkerButton"
-                android:text="-" />
-
             <TextView
                 android:id="@+id/textViewWorkers"
-                android:layout_width="wrap_content"
+                android:layout_width="5dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
@@ -153,14 +145,47 @@
                 android:text="/0"
                 android:textAlignment="textStart" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/buttonAddWorkers"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:backgroundTint="#B52C2C"
+                android:onClick="RemoveWorkerButton"
+                android:text="-" />
+
             <Button
                 android:id="@+id/buttonRemoveWorkers"
-                android:layout_width="10dp"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:layout_weight="1"
+                android:backgroundTint="#368A27"
                 android:onClick="AddWorkerButton"
                 android:text="+" />
-
         </LinearLayout>
 
         <pl.droidsonroids.gif.GifImageView
@@ -185,7 +210,7 @@
             <ImageView
                 android:id="@+id/imageViewResource"
                 android:layout_width="40dp"
-                android:layout_height="60dp"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:src="@drawable/logs" />
 
@@ -208,7 +233,7 @@
                 android:id="@+id/textViewRare"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="center"
                 android:text="0" />
 

@@ -7,7 +7,7 @@ import android.media.MediaPlayer;
 public class SoundPlayer {
 
     //Creating a new mediaPlayer that will be used for all sound effects
-    MediaPlayer soundEffect;
+    MediaPlayer soundEffect, music;
 
     /**   To play a sound pass the activity you're in, the sound you wish to play and if sound has
      *    been muted by the player
@@ -31,6 +31,17 @@ public class SoundPlayer {
             });
             //Starting the sound effect
             soundEffect.start();
+        }
+    }
+
+    public void PlayMusic(Activity activity, int sound, boolean isMuted) {
+        //Checking if music is muted before playing
+        if (!isMuted) {
+            //Loading the sound that was passed in
+            music = MediaPlayer.create(activity, sound);
+            music.setLooping(true );
+            //Starting the sound effect
+            music.start();
         }
     }
     public void Stop(MediaPlayer sound){
