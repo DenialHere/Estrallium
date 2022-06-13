@@ -7,6 +7,7 @@ import com.example.test_activity.Constants;
 import com.example.test_activity.Managers.DialogueManager;
 import com.example.test_activity.Managers.SaveManager;
 import com.example.test_activity.Skills.Player;
+import com.example.test_activity.Tutorial;
 
 //TODO
 
@@ -34,6 +35,7 @@ public class Workers {
             if (Forest_Workers < workerCapacity && workerUnassigned > 0){
                 workerUnassigned--;
                 Forest_Workers++;
+                Tutorial.WorkersClicked = true;
             }
             else {
                 ErrorMessage(activity);
@@ -42,6 +44,7 @@ public class Workers {
             if (Mine_Workers < workerCapacity && workerUnassigned > 0 && Player.Level >= Constants.miningLevelRequiredForPlot){
                 workerUnassigned--;
                 Mine_Workers++;
+                Tutorial.WorkersClicked = true;
             }
             else {
                 ErrorMessage(activity);
@@ -51,6 +54,7 @@ public class Workers {
             if (FishingBoat_Workers < workerCapacity && workerUnassigned > 0 && Player.Level >= Constants.fishingLevelRequiredForPlot){
                 workerUnassigned--;
                 FishingBoat_Workers++;
+                Tutorial.WorkersClicked = true;
             } else {
                 ErrorMessage(activity);
             }
@@ -59,6 +63,7 @@ public class Workers {
             if (Farm_Workers < workerCapacity && workerUnassigned > 0) {
                 workerUnassigned--;
                 Farm_Workers++;
+                Tutorial.WorkersClicked = true;
             } else {
                 ErrorMessage(activity);
             }

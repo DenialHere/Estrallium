@@ -16,6 +16,7 @@ public class Tasks {
     public static int AmountOfTasks = 0;
     public static int TaskTimer = 5000;
     public static Boolean IsEnabled = true;
+    public static Boolean HasBeenSeen = false;
 
     public static String[] Thing = {"Our barn ", "The chapel ", "The town hall ", "The inn ", "My house ", "My barn ", "The bridge ", "The theater ", "The barracks ", "The general store ", "My store ", "The mill ",
     "The stables ", "My forge ", "The workshop ", "My granary ", "Our military outpost ", "The great hall ", "The blacksmith's workshop ", "The brewery ", "The butcher shop ", "My farmhouse ", "The smokehouse ", "The bathhouse ",
@@ -33,8 +34,12 @@ public class Tasks {
     public static String[] Scenario = {"", "", "", "", ""};
     public static int[][] ResourcesRequired = { {0,0,0,0}, {0,0,0,0} };
 
+
     public static void GenerateScenario(Activity activity){
 
+        if (Tutorial.Done == false && HasBeenSeen == false){
+            HasBeenSeen = true;
+        }
         if (Tasks.AmountOfTasks < 4) {
 
             Random rand = new Random();
@@ -115,6 +120,10 @@ public class Tasks {
     }
     public static void GenerateFree(Activity activity){
 
+        if (Tutorial.Done == false && HasBeenSeen == false){
+            HasBeenSeen = true;
+        }
+
         Random rand = new Random();
 
         CalculateMinMax(Player.Level);
@@ -160,6 +169,10 @@ public class Tasks {
     }
 
     public static void GenerateDemand(){
+
+        if (Tutorial.Done == false && HasBeenSeen == false){
+            HasBeenSeen = true;
+        }
             Random rand = new Random();
 
             int thingSelection = rand.nextInt(Thing.length);
@@ -228,7 +241,7 @@ public class Tasks {
 
             }
 
-            System.out.println(Demand);
+            System.out.println("demand equals " + Demand);
     }
 
 

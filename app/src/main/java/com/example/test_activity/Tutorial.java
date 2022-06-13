@@ -11,5 +11,9 @@ public class Tutorial {
     public static boolean SwipeDone1 = false;
     public static boolean SwipeDone2 = false;
     public static boolean SwipeDone3 = false;
-
+    public static boolean TasksDone = false;
+    public static boolean RefineryDone = false;
+    public static boolean RefineryClicked = false;
+    public static boolean WorkersDone = false;
+    public static boolean WorkersClicked = false;
 }

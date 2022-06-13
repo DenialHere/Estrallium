@@ -33,7 +33,7 @@ public class TutorialActivity extends AppCompatActivity {
 
         Tasks.IsEnabled = false;
         //Hide skip tutorial button
-        if (Tutorial.ClickPlotDone == true){
+        if (Tutorial.ClickPlotDone == true || Tasks.HasBeenSeen == true){
             btnNo.setVisibility(View.GONE);
         }
 

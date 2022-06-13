@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.test_activity.Inventory.Inventory;
 import com.example.test_activity.Inventory.Kingdom;
+import com.example.test_activity.Inventory.Refinery;
 import com.example.test_activity.R;
 import com.example.test_activity.Skills.Player;
 import com.example.test_activity.Tasks;
@@ -49,11 +50,15 @@ public class KingdomActivity extends AppCompatActivity {
         TextView woodNeeded = findViewById(R.id.textViewWoodNeededKingdom);
         TextView stoneNeeded = findViewById(R.id.textViewStoneNeededKingdom);
         TextView fishNeeded = findViewById(R.id.textViewStoneFishNeededKingdom);
+        TextView lumberNeeded = findViewById(R.id.textViewLumberNeededKingdom);
+        TextView farmNeeded = findViewById(R.id.textViewFarmNeededKingdom);
 
         //TEXT VIEWS
         TextView stoneText = findViewById(R.id.textViewStoneKingdom);
         TextView woodText = findViewById(R.id.textViewWoodKingdom);
         TextView fishText = findViewById(R.id.textViewFishKingdom);
+        TextView lumberText = findViewById(R.id.textViewLumberKingdom);
+        TextView farmText = findViewById(R.id.textViewFarmKingdom);
 
 
 
@@ -67,6 +72,7 @@ public class KingdomActivity extends AppCompatActivity {
             playerLevel.setVisibility(View.VISIBLE);
             playerLevel.setVisibility(View.VISIBLE);
         }
+
         //WOOD
         if (Kingdom.Requirements[1] == 0){
             woodNeeded.setVisibility(View.INVISIBLE);
@@ -76,6 +82,7 @@ public class KingdomActivity extends AppCompatActivity {
             woodNeeded.setVisibility(View.VISIBLE);
             woodNeeded.setVisibility(View.VISIBLE);
         }
+
         //STONE
         if (Kingdom.Requirements[2] == 0){
             stoneNeeded.setVisibility(View.INVISIBLE);
@@ -85,7 +92,8 @@ public class KingdomActivity extends AppCompatActivity {
             stoneNeeded.setVisibility(View.VISIBLE);
             stoneText.setVisibility(View.VISIBLE);
         }
-        //STONE
+
+        //FISH
         if (Kingdom.Requirements[3] == 0){
             fishNeeded.setVisibility(View.INVISIBLE);
             fishText.setVisibility(View.INVISIBLE);
@@ -95,6 +103,25 @@ public class KingdomActivity extends AppCompatActivity {
             fishText.setVisibility(View.VISIBLE);
         }
 
+        //LUMBER
+        if (Kingdom.Requirements[4] == 0){
+            lumberNeeded.setVisibility(View.INVISIBLE);
+            lumberText.setVisibility(View.INVISIBLE);
+        }
+        else {
+            lumberNeeded.setVisibility(View.VISIBLE);
+            lumberText.setVisibility(View.VISIBLE);
+        }
+        //WHEAT
+        if (Kingdom.Requirements[5] == 0){
+            farmNeeded.setVisibility(View.INVISIBLE);
+            farmText.setVisibility(View.INVISIBLE);
+        }
+        else {
+            farmNeeded.setVisibility(View.VISIBLE);
+            farmText.setVisibility(View.VISIBLE);
+        }
+
 
         //Setting the requirements
         kingdomLevel.setText(Integer.toString(Kingdom.Level));
@@ -102,6 +129,8 @@ public class KingdomActivity extends AppCompatActivity {
         woodNeeded.setText(Integer.toString(Kingdom.Requirements[1]));
         stoneNeeded.setText(Integer.toString(Kingdom.Requirements[2]));
         fishNeeded.setText(Integer.toString(Kingdom.Requirements[3]));
+        lumberNeeded.setText(Integer.toString(Kingdom.Requirements[4]));
+        farmNeeded.setText(Integer.toString(Kingdom.Requirements[5]));
 
         rewards.setText(Kingdom.GetRewardsText());
 
@@ -136,6 +165,22 @@ public class KingdomActivity extends AppCompatActivity {
         else
         {
             fishNeeded.setTextColor(Color.GREEN);
+        }
+
+        if (Refinery.Lumber < Integer.parseInt(lumberNeeded.getText().toString())){
+            lumberNeeded.setTextColor(Color.RED);
+        }
+        else
+        {
+            lumberNeeded.setTextColor(Color.GREEN);
+        }
+
+        if (Inventory.Wheat_Quantity < Integer.parseInt(farmNeeded.getText().toString())){
+            farmNeeded.setTextColor(Color.RED);
+        }
+        else
+        {
+            farmNeeded.setTextColor(Color.GREEN);
         }
     }
 

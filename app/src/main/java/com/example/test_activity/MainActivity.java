@@ -4,10 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.GestureDetector;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -25,9 +27,11 @@ import com.example.test_activity.Activities.StoreActivity;
 import com.example.test_activity.Activities.TasksActivity;
 import com.example.test_activity.Activities.TutorialActivity;
 import com.example.test_activity.Inventory.Kingdom;
+import com.example.test_activity.Inventory.Refinery;
 import com.example.test_activity.Inventory.Workers;
 import com.example.test_activity.Inventory.Inventory;
 import com.example.test_activity.Inventory.Rare;
+import com.example.test_activity.Managers.DialogueManager;
 import com.example.test_activity.Managers.SaveManager;
 import com.example.test_activity.Managers.SoundPlayer;
 import com.example.test_activity.Skills.Farming;
@@ -54,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     static int DIRECTION_LEFT = 2;
     ProgressBar skillLevelPb, playerLevelPb;
     private AdView mAdView;
-    ImageView plotCursor, kingdomCursor, swipeCursor, storeCursor;
+    ImageView plotCursor, kingdomCursor, swipeCursor, storeCursor, refineryCursor, workerCursor;
 
 
 
@@ -64,8 +68,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SoundPlayer music = new SoundPlayer();
-        music.PlayMusic(this, R.raw.bgm, Player.MusicIsMuted);
+        MediaPlayer music = MediaPlayer.create(this, R.raw.bgm);
+        music.setLooping(true);
+        music.setVolume(100, 100);
+        music.start();
 
 
         MobileAds.initialize(this, new OnInitializationCompleteListener() {
@@ -78,41 +84,13 @@ public class MainActivity extends AppCompatActivity {
 
         mAdView.setAdSize(AdSize.BANNER);
 
-        mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        mAdView.setAdUnitId("ca-app-pub-2772042507352328~5305632491");
 
 
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                // Code to be executed when an ad finishes loading.
-            }
-
-            @Override
-            public void onAdFailedToLoad(LoadAdError adError) {
-                // Code to be executed when an ad request fails.
-            }
-
-            @Override
-            public void onAdOpened() {
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            @Override
-            public void onAdClicked() {
-                // Code to be executed when the user clicks on an ad.
-            }
-
-            @Override
-            public void onAdClosed() {
-                // Code to be executed when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        });
 
 
 
@@ -134,6 +112,8 @@ public class MainActivity extends AppCompatActivity {
         kingdomCursor = findViewById(R.id.cursorKingdom);
         swipeCursor = findViewById(R.id.swipe);
         storeCursor = findViewById(R.id.cursorStore);
+        refineryCursor = findViewById(R.id.cursorRefinery);
+        workerCursor = findViewById(R.id.cursorWorker);
         StartTutorial();
 
         /** LOAD PREVIOUS GAME DATA **/
@@ -201,7 +181,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                     if (chance == 1){
                         Tasks.GenerateDemand();
-                        if (Tasks.Demand != "" || Tasks.Demand.isEmpty()){
+                        if (Tasks.Demand.equals("")){}
+                        else {
                             Intent intent = new Intent(activity, DemandActivity.class);
                             startActivity(intent);
                         }
@@ -240,12 +221,28 @@ public class MainActivity extends AppCompatActivity {
                 kingdomCursor.setVisibility(View.GONE);
                 Tutorial.KingdomDone = true;
             }
-            if (Kingdom.Level >= 3 && Tutorial.StoreDone == false) {
+            if (Kingdom.Level == 2 && Tutorial.StoreDone == false) {
                 Tutorial.Message = "You got some gold finally! \n Why don't you try buying something from the shop?";
                 Intent intent = new Intent(this, TutorialActivity.class);
                 startActivity(intent);
                 storeCursor.setVisibility(View.VISIBLE);
                 Tutorial.StoreDone = true;
+            }
+            if (Kingdom.Level == 3 && Tutorial.WorkersDone == false) {
+                Tutorial.Message = "You got some workers to do your work for you! \n Assign them to plots and they will gain resources for you while you are away.";
+                Intent intent = new Intent(this, TutorialActivity.class);
+                startActivity(intent);
+                workerCursor.setVisibility(View.VISIBLE);
+                Tutorial.WorkersDone = true;
+            }
+            if (Tutorial.WorkersClicked == true) {
+                workerCursor.setVisibility(View.GONE);
+            }
+            if (Tasks.HasBeenSeen == true && Tutorial.TasksDone == false) {
+                Tutorial.Message = "You citizens will sometimes ask for help, or even help you out! Some tasks will stay in your active tasks until you complete them, click the tasks button to view active tasks. If you chose to help them out it will increase your favour. Higher favour provides a range of benefits to your kingdom.";
+                Intent intent = new Intent(this, TutorialActivity.class);
+                startActivity(intent);
+                Tutorial.TasksDone = true;
             }
             if (Tutorial.StoreClicked == true) {
                 storeCursor.setVisibility(View.GONE);
@@ -266,14 +263,26 @@ public class MainActivity extends AppCompatActivity {
                 plotCursor.setVisibility(View.GONE);
                 Tutorial.SwipeDone3 = true;
             }
+            if (Player.Level >= 15 && Tutorial.RefineryDone == false) {
+                Tutorial.Message = "You can do more with your raw resources. Click on the refinery and process your them into new building materials for your kingdom! ";
+                Intent intent = new Intent(this, TutorialActivity.class);
+                startActivity(intent);
+                refineryCursor.setVisibility(View.VISIBLE);
+                Tutorial.RefineryDone = true;
+            }
+            if (Tutorial.RefineryClicked == true) {
+                refineryCursor.setVisibility(View.GONE);
+            }
         }
     }
 
     public void CheatButton(View view){
-        Inventory.Log_Quantity = 1000000;
-        //Inventory.Stone_Quantity = 1000000;
-        Inventory.Fish_Quantity = 1000000;
-        Player.Level = 1000;
+        Inventory.Log_Quantity += 100;
+        Inventory.Stone_Quantity += 100;
+        Inventory.Fish_Quantity += 100;
+        Inventory.Wheat_Quantity += 100;
+        Refinery.Lumber += 1;
+        Player.Level += 1;
         UpdateViews();
 
     }
@@ -305,9 +314,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void RefineryButton(View view){
-        Tasks.IsEnabled = false;
-        Intent intent = new Intent(this, RefineryActivity.class);
-        startActivity(intent);
+        if (Player.Level >= 15){
+            Tasks.IsEnabled = false;
+            Tutorial.RefineryClicked = true;
+            Intent intent = new Intent(this, RefineryActivity.class);
+            startActivity(intent);
+        }
+        else {
+            DialogueManager.ShowMessage(this, "You need to be level 15 to access the refinery.", 0, Gravity.CENTER);
+        }
+
     }
 
     public void UpdateViews(){
@@ -316,6 +332,7 @@ public class MainActivity extends AppCompatActivity {
         TextView specialItem = findViewById(R.id.textViewRare);
         TextView workers = findViewById(R.id.textViewWorkers);
         TextView workersAvailable = findViewById(R.id.textViewWorkersAvaliable);
+        TextView playerLevel = findViewById(R.id.textViewPlayerLevel);
 
         if (Player.CurrentPlot == Constants.WOOD){
             resourceTxt.setText(Integer.toString(Inventory.Log_Quantity));
@@ -338,6 +355,7 @@ public class MainActivity extends AppCompatActivity {
             workers.setText(Integer.toString(Workers.Farm_Workers));
         }
         workersAvailable.setText("/" + Workers.workerUnassigned);
+        playerLevel.setText(Player.Level + "");
         ProgressBarSkillLevel();
     }
 
@@ -427,9 +445,9 @@ public class MainActivity extends AppCompatActivity {
             Player.AddExperience(this);
 
         }
-        if (Player.CurrentPlot == Inventory.WHEAT && Player.Level >=15 && Farming.IsFarming == false){
+        if (Player.CurrentPlot == Inventory.WHEAT && Player.Level >=Constants.farmingLevelRequiredForPlot && Farming.IsFarming == false){
             Farming.IsFarming = true;
-            gatherSound.Play(this, R.raw.fishing_sound, Player.SoundIsMuted);
+
             TextView farmTimer = findViewById(R.id.textViewTime);
 
             new CountDownTimer(Farming.Time, 1000) {
@@ -448,7 +466,6 @@ public class MainActivity extends AppCompatActivity {
                     textViewSkill.setText(Integer.toString(Farming.Level));
                     Farming.IsFarming = false;
                     farmTimer.setText("Farming complete!");
-
 
                 }
 
@@ -554,7 +571,6 @@ public class MainActivity extends AppCompatActivity {
                 rareTxt.setText(Integer.toString(Rare.Magic_Seeds));
                 skillTxt.setText(Integer.toString(Woodcutting.Level));
                 workers.setText(Integer.toString(Workers.Forest_Workers));
-                System.out.println("CHANGING TO WOOD");
                 break;
             case 2:
                 specialItemImg.setImageResource(R.drawable.gem);
@@ -565,9 +581,8 @@ public class MainActivity extends AppCompatActivity {
                 rareTxt.setText(Integer.toString(Rare.Gem));
                 skillTxt.setText(Integer.toString(Mining.Level));
                 workers.setText(Integer.toString(Workers.Mine_Workers));
-                System.out.println("CHANGING TO STONE");
 
-                if (Player.Level >= 5) {
+                if (Player.Level >= Constants.miningLevelRequiredForPlot) {
                     plotImg.setImageResource(R.drawable.minebackground);
                     Player.CurrentPlot = Inventory.STONE;
                 }
@@ -581,9 +596,8 @@ public class MainActivity extends AppCompatActivity {
                 rareTxt.setText(Integer.toString(Rare.RainbowFish));
                 skillTxt.setText(Integer.toString(Fishing.Level));
                 workers.setText(Integer.toString(Workers.FishingBoat_Workers));
-                System.out.println("CHANGING TO Fish");
 
-                if (Player.Level >= 10) {
+                if (Player.Level >= Constants.fishingLevelRequiredForPlot) {
                     plotImg.setImageResource(R.drawable.fishingbackground);
                     Player.CurrentPlot = Inventory.FISH;
                 }
@@ -597,7 +611,7 @@ public class MainActivity extends AppCompatActivity {
                 rareTxt.setText(Integer.toString(Rare.Giant_Wheat_Seeds));
                 skillTxt.setText(Integer.toString(Farming.Level));
                 workers.setText(Integer.toString(Workers.Farm_Workers));
-                if (Player.Level >= 15) {
+                if (Player.Level >= Constants.farmingLevelRequiredForPlot) {
                     plotImg.setImageResource(R.drawable.farmbackground);
                     Player.CurrentPlot = Inventory.WHEAT;
                 }
